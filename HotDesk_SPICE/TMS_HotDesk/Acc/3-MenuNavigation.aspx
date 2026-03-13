@@ -1,0 +1,495 @@
+﻿<%@ Page Language="VB" MasterPageFile="~/master/Main.master" AutoEventWireup="false" CodeFile="MenuNavigation.aspx.vb" Inherits="Acc_MenuNavigation" title="TMS Check In" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+
+<script type="text/javascript">
+
+    var popupWindow=null;
+
+  function popupwindow(ID, Name) {
+     if( document.getElementById('<%=txtStaffName.ClientID%>').value == "")
+     {
+        var w = 800;
+        var h = 600;
+        var left = (screen.width/2)-(w/2);
+        var top = (screen.height/2)-(h/2);
+        popupWindow = window.open('<%= ResolveUrl("~/acc/PopUp/List.aspx") %>?itm1=' + ID + '&itm2=' + Name,'PopUp', 'directories=no,titlebar=no,toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=no,width=800,height=600,top='+top+', left='+left +'');
+    
+     }
+     
+     else
+     {  
+        document.getElementById('<%=txtStaffName.ClientID%>').value = "";
+        document.getElementById('<%=txtStaffID.ClientID%>').value = "";
+      }
+   };
+   
+function parent_disable() {
+if(popupWindow && !popupWindow.closed)
+popupWindow.focus();
+}
+</script>
+  
+<script src="../jss/jquery.1.7.2.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="../jss/jquery.maphilight.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+$("#dropdowncontent1").show();
+document.getElementById("warehouse1").style.backgroundColor = "BLUE";
+      $("#dropdowncontent2").show();
+       $("#dropdowncontent3").show();
+       
+        $(".pnlhd2").hide();
+  
+    $("#warehouse1").click(function(){
+        document.getElementById("warehouse1").style.backgroundColor = "BLUE";
+        document.getElementById("warehouse2").style.backgroundColor = "BLACK";   
+        document.getElementById("checkInList").style.backgroundColor = "BLACK"; 
+        document.getElementById("checkInList2").style.backgroundColor = "BLACK";   
+        $("#dropdowncontent1").show();
+        $("#dropdowncontent2").hide();
+        $("#dropdowncontent3").hide();
+        $("#dropdowncontent4").hide();
+         $(".pnlhd2").hide();
+    });
+    $("#warehouse2").click(function(){
+        document.getElementById("warehouse1").style.backgroundColor = "BLACK";
+        document.getElementById("warehouse2").style.backgroundColor = "BLUE";   
+        document.getElementById("checkInList").style.backgroundColor = "BLACK";
+        document.getElementById("checkInList2").style.backgroundColor = "BLACK";   
+        $("#dropdowncontent1").hide();
+        $("#dropdowncontent2").show();
+        $("#dropdowncontent3").hide();
+         $("#dropdowncontent4").hide();
+         $(".pnlhd2").show();
+    });
+    $("#checkInList").click(function(){
+	document.getElementById("<%= frame1.ClientID %>").src = 'PopUp/list2.aspx';
+        document.getElementById("warehouse1").style.backgroundColor = "BLACK";
+        document.getElementById("warehouse2").style.backgroundColor = "BLACK"; 
+        document.getElementById("checkInList").style.backgroundColor = "BLUE"; 
+         document.getElementById("checkInList2").style.backgroundColor = "BLACK";       
+        $("#dropdowncontent1").hide();
+        $("#dropdowncontent2").hide();
+        $("#dropdowncontent3").show();
+         $("#dropdowncontent4").hide();
+         $(".pnlhd2").hide();
+    });
+     $("#checkInList2").click(function(){
+	document.getElementById("<%= Iframe2.ClientID %>").src = 'PopUp/list3.aspx';
+        document.getElementById("warehouse1").style.backgroundColor = "BLACK";
+        document.getElementById("warehouse2").style.backgroundColor = "BLACK"; 
+        document.getElementById("checkInList").style.backgroundColor = "BLACK";   
+        document.getElementById("checkInList2").style.backgroundColor = "BLUE";      
+        $("#dropdowncontent1").hide();
+        $("#dropdowncontent2").hide();
+        $("#dropdowncontent3").hide();
+         $("#dropdowncontent4").show();
+         $(".pnlhd2").hide();
+    });
+
+});
+
+window.onload = function(){
+       $(".wrapdrop").hide();
+       ShowCurrentTime() ;
+};
+function ShowCurrentTime() {
+var dt = new Date();
+document.getElementById("lblTime").innerHTML = dt.format("dd/MM/yyyy hh:mm:ss");;
+window.setTimeout("ShowCurrentTime()", 1000); // Here 1000(milliseconds) means one 1 Sec  
+}
+</script>
+
+<script type ="text/javascript" src="../js/jquery.colorbox.js"></script>
+<link rel="stylesheet" href ="../css/colorbox.css" />
+<link href="../css_new/TMSAccess.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" >
+
+function testing(checktype,staffName,seatName)
+{PageMethods.testing(checktype,staffName,seatName,OnSuccess);}
+
+function OnSuccess(response, userContext, methodName) 
+{setTimeout(location.reload(), 60000);alert(response);}
+
+			$(document).ready(function(){
+			
+				//$(".youtube").colorbox({iframe:true, innerWidth:900, innerHeight:600});
+			    $('.dc input').click(function(){ 
+			    var classname = this.className ;
+			    var str =classname.substring(5);
+		        var mapclass = "map" + str;
+		 
+			                    if( document.getElementById('<%=txtStaffName.ClientID%>').value == "")
+                                       {
+//                                          if(mapclass == "map25" || mapclass == "map26" || mapclass == "map27" || mapclass == "map28" 
+//                                          || mapclass == "map29" || mapclass == "map30" || mapclass == "map51" || mapclass == "map52" || mapclass == "map53" || mapclass == "map54" 
+//                                           )
+                                            if( mapclass == "map12" ||mapclass == "map34"||mapclass== "map35")
+                                           {
+                                          return false;
+                                          
+                                          }else{
+                                           if (confirm('Are you sure you want to check out from this desk?')) {
+                                              
+                                            testing("OUT","",mapclass);
+                                            return false;
+                                           } else {
+                                            return false;
+                                            }
+                                          }
+                                       
+                                           
+                                       }
+                                       else
+                                       {
+                                           return false;
+                                       }
+			    });
+			    
+			    if ($('#<%= btnCheck.ClientID %>').val()=="Check In/Out"){
+			        
+			              
+                     $('.tabs area').click(function(){ 
+                              if ($(this ).hasClass( "red" )){
+
+                             }else{
+                                       var x = $.trim(document.getElementById('<%=txtStaffName.ClientID%>').value);
+                                       if( document.getElementById('<%=txtStaffName.ClientID%>').value == "" )
+                                       {
+                                             return false;
+                                       }
+                                       else
+                                       {  
+
+                                          if( this.id == "map12"||this.id == "map34"||this.id == "map35"){
+                                          return false;
+                                          
+                                          }
+                                         else if( this.id == "map31"){
+                                                if( x == "LIM POH HIANG" ) //
+                                               {
+                                                    if (confirm('Are you sure you want to check in this desk?' )) {
+                                                      
+                                                    testing("IN",document.getElementById('<%=txtStaffName.ClientID%>').value,this.id);
+                                                   } else {
+                                                    return false;
+                                                    
+                                                   }
+                                               }
+                                               else{
+                                               
+                                                    // return false;
+                                                    alert("Sorry, you are not allowed to check in this desk.");
+                                               }
+                                          }
+                                          else if( this.id == "map32"){
+                                                if( x == "NG SAI HWA" ) //
+                                               {
+                                                    if (confirm('Are you sure you want to check in this desk?' )) {
+                                                      
+                                                    testing("IN",document.getElementById('<%=txtStaffName.ClientID%>').value,this.id);
+                                                   } else {
+                                                    return false;
+                                                   }
+                                               }
+                                               else{
+                                               // return false;
+                                                    alert("Sorry, you are not allowed to check in this desk.");
+                                               }
+                                          }
+                                          else if( this.id == "map33"){
+                                                if( x == "OOI YINN LING" ) //
+                                               {
+                                                    if (confirm('Are you sure you want to check in this desk?' )) {
+                                                      
+                                                    testing("IN",document.getElementById('<%=txtStaffName.ClientID%>').value,this.id);
+                                                   } else {
+                                                    return false;
+                                                   }
+                                               }
+                                               else{
+                                               // return false;
+                                                    alert("Sorry, you are not allowed to check in this desk.");
+                                               }
+                                          }
+                                          else{
+                                              if (confirm('Are you sure you want to check in this desk?' )) {
+                                                  
+                                                testing("IN",document.getElementById('<%=txtStaffName.ClientID%>').value,this.id);
+                                               } else {
+                                                return false;
+                                               }
+                                          }
+                                      
+                                            
+                                       }
+                              };
+                            
+                          });
+                 };
+			});
+		</script>
+
+<script type="text/javascript">
+    $(function() {
+      $(".map").maphilight({fillOpacity:1,fillColor:'0ef748'})
+    });
+ 
+ $(document).ready(function(){  
+ 
+var chk;
+
+var i=1;
+
+for (i; i < 64; i++) {
+
+if (chk==i){
+alert("ERROR occur");
+location.reload;
+}
+else{
+chk=i;
+}
+             //alert(i);
+
+              if (document.querySelector('.hi' + i).value[0]==1) {
+                   
+                   var abc = 'map'+ i;
+                   var cur = $('#'+abc);
+                   var data = cur.data('maphilight') || {};
+                   
+                   data.alwaysOn = !data.alwaysOn;
+                   data.fillColor = 'f84c24';//green
+                   data.strokeColor = 'f84c24';
+                   cur.data('maphilight', data).trigger('alwaysOn.maphilight');
+                    cur.addClass('red');
+                  
+//                   if (cur.hasClass("current") == false)
+//                   {
+//                       var thisTarget = cur.attr("href");
+//                       cur.parents(".tabs").find('area.current').removeClass('current');
+//                       cur.addClass('current');
+
+//                       cur.parents(".tabs").nextAll(".tab-content").children(":visible").fadeOut(1, function() {
+//                           $(thisTarget).fadeIn("fast");
+//                       });
+//                  }
+                 
+             }
+             else{
+            // alert('map'+ i);
+                 var abc = 'map'+ i;
+                 var cur = $('#'+abc);
+                 var data = cur.data('maphilight') || {};
+                   data.fillColor = '0ef748'; //red
+                   data.strokeColor = '0ef748';
+                 data.alwaysOn = !data.alwaysOn;
+                 cur.data('maphilight', data).trigger('alwaysOn.maphilight');
+                  cur.addClass('green');
+             }
+             
+
+          }
+          
+        });
+        
+        
+ </script>
+		
+<style>
+
+.dropbtn
+{
+	-webkit-appearance: none;
+width:160px;
+	padding: 16px 0;
+	padding-left:-5px;
+	}
+.lbldate
+{
+	position:absolute;
+	z-index:100px;
+	color:White;
+	top:15px;
+	right:20px;
+	}
+</style>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+
+<asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true">
+</asp:ScriptManager>
+
+<asp:Panel runat="server" ID="pnlhd" CssClass="pnlhd">
+<%--<asp:HiddenField ID="hi2" runat="server" />--%>
+</asp:Panel>
+
+<%--<input type="hidden" id="hdid1" value="1" runat="server" class="txtTest" />--%>
+<label id="lblTime" style=" font-weight:bold" class="lbldate" ></label>
+<div class="header">
+<h2>TMS SPICE Hot Desking System</h2>
+</div>
+<div class="wrap">
+    <div class="mtest center">
+        <div class="btnlist">
+<%--
+           <asp:TextBox ID="TextBox1" runat="server" Text=""  Width="491px"  onchange="changeBtnValue(this);"  ></asp:TextBox>--%>
+          <input type='button' id='warehouse1' value='Central Park' class="dropbtn" />
+          <input type='button' id='warehouse2' value='IToT Hall' class="dropbtn" />
+          <input type='button' id='checkInList' value='Last Person' class="dropbtn" />
+          <input type='button' id='checkInList2' value='Arm Record' class="dropbtn" />
+          <%--<asp:Button id="checkInList" runat="server" Text="In Office" CssClass="dropbtn" />--%>
+        </div>
+        
+        <div class="btnlist right absolute"> 
+         <asp:Button ID="btnCheck" ValidationGroup="ID" runat="server" Text="Check In/Out" class="dropbtn " UseSubmitBehavior ="false"  onclientclick="popupwindow('txtStaffID','txtStaffName'); return false;" />
+           <%-- <asp:Button ID="btnCheck" ValidationGroup="ID" runat="server" Text="Check" class="dropbtn youtube" href="Popup/PopUp.aspx" target="_blank"/>--%>
+        </div>
+    </div>
+   <div class="wrapdrop"><h2></h2> </div>
+    <div class="wrap hidedrop">
+         
+        <div class="dropdown">
+          <div style="background:white; width:727px; z-index:100; position:absolute; top:130px;">&nbsp; 
+           <asp:TextBox ID="txtStaffID" runat="server"  CssClass="txtReadOnly txtStaffID txt"  STYLE="WIDTH: 150PX; BORDER-WIDTH:0PX;COLOR:black;BACKGROUND-COLOR:Transparent; font-size:22PX; font-weight:bold;" Text=""  Enabled="false"></asp:TextBox>&nbsp; &nbsp; 
+           <asp:TextBox ID="txtStaffName" runat="server"  CssClass="txtReadOnly txtStaffName txt" STYLE="BORDER-WIDTH:0PX;COLOR:black;BACKGROUND-COLOR:Transparent; font-size:22PX; font-weight:bold;" Text="" Enabled="false" Width="491px"  onkeyup="keyUP(this);" ></asp:TextBox>
+           <asp:label ID="userID" CssClass="LabelChange" style="display:none; color:white;font-size:18px;  padding-left:100px;" Text="" runat="server" />
+          </div>
+         
+          <div id="dropdowncontent1" class="dropdown-content dc" >
+              <asp:Panel runat="server" ID="pnlhd1" CssClass="pnlhd"></asp:Panel>
+           <asp:Image ID="Image1" runat="server" Height="" Width="" ImageUrl="../Acc/left.png" usemap="#simple" CssClass="map" />
+                <map  id="tabs" class="tabs" name="simple">
+      
+                    
+                    <!--left-->
+<area alt="" title=""  shape="poly" id="map1"  coords="170,207,211,207,211,289,128,289,128,250,160,250,170,235,170,207"  />
+<area alt="" title=""  shape="poly" id="map2"  coords="214,207,256,207,256,237,270,250,298,250,298,289,214,289, 214,207 " />
+<area alt="" title=""  shape="poly" id="map3"  coords="170,375,211,375,211,292,128,292,128,332,160,332,170,346,170,375" />
+<area alt="" title=""  shape="poly" id="map4"  coords="214,375,256,375,256,348,270,332,298,332,298,292,214,292, 214,375 " />
+
+<area alt="" title=""  shape="poly" id="map5"  coords="170,430,211,430,211,513,128,513,128,473,160,473,170,459,170,430" />
+<area alt="" title=""  shape="poly" id="map6"  coords="214,430,214,513,298,513,298,473,265,473,255,461,256,430, 214,430 " />
+<area alt="" title=""  shape="poly" id="map7"  coords="170,598,211,598,211,515,128,515,128,555,160,555,170,567,170,598" />
+<area alt="" title=""  shape="poly" id="map8"  coords="214,598,256,598,256,567,270,555,298,555,298,515,214,515, 214,598 " />
+
+<area alt="" title=""  shape="poly" id="map9"  coords="170,600,211,600,211,684,128,684,128,643,161,643,170,630,170,600" />
+<area alt="" title=""  shape="poly" id="map10"  coords="214,604,214,684,296,684,296,643,264,643,255,630,256,600, 214,600 " />
+<area alt="" title=""  shape="poly" id="map11"  coords="170,770,211,770,211,686,128,686,128,726,161,726,170,740,170,770" />
+<area alt="" title=""  shape="poly" id="map12"  coords="214,770,256,770,255,740,266,726,296,726,297,686,214,686, 214,770 " />
+                  
+                    <!--middle-->
+<area alt="" title=""  shape="poly" id="map13"  coords="415,207,457,207,457,290,375,290,375,250,407,250,415,239,415,207" />
+<area alt="" title=""  shape="poly" id="map14"  coords="461,207,502,207,502,239,514,250,544,250,544,290,461,290, 461,207 " />
+<area alt="" title=""  shape="poly" id="map15"  coords="415,375,458,375,458,292,375,292,375,333,407,333,415,345,415,375" />
+<area alt="" title=""  shape="poly" id="map16"  coords="461,375,502,375,502,345,514,333,544,333,544,292,461,292, 461,375 " />
+
+<area alt="" title=""  shape="poly" id="map17"  coords="415,430,458,430,458,512,375,512,375,474,407,474,415,461,415,430" />
+<area alt="" title=""  shape="poly" id="map18"  coords="461,430,502,430,502,460,514,472,544,474,544,512,461,512, 461,430 " />
+<area alt="" title=""  shape="poly" id="map19"  coords="415,598,458,598,458,515,375,515,375,555,407,555,415,570,415,598" />
+<area alt="" title=""  shape="poly" id="map20"  coords="461,598,502,598,502,570,514,555,544,555,544,515,461,515, 461,598 " />
+
+<area alt="" title=""  shape="poly" id="map21"  coords="415,601,458,601,458,683,375,683,375,644,411,644,415,631,415,601" />
+<area alt="" title=""  shape="poly" id="map22"  coords="461,601,502,601,502,631,514,644,544,644,544,683,461,683, 461,601 " />
+<area alt="" title=""  shape="poly" id="map23"  coords="415,770,458,770,458,685,375,685,375,727,411,727,415,741,415,770" />
+<area alt="" title=""  shape="poly" id="map24"  coords="461,770,502,770,502,741,514,727,544,727,544,685,461,685, 461,770 " />
+
+ <!--right-->
+<area alt="" title=""  shape="poly" id="map25"  coords="633,238,717,238,717,320,674,320,674,294,666,277,633,277,633,238" />
+<area alt="" title=""  shape="poly" id="map26"  coords="633,406,717,406,717,325,674,325,674,352,666,366,633,366,633,406" />
+
+<area alt="" title=""  shape="poly" id="map27"  coords="633,409,717,409,717,491,674,491,674,466,666,448,633,449,633,409" />
+<area alt="" title=""  shape="poly" id="map28"  coords="633,577,717,577,717,495,674,495,674,524,666,538,633,538,633,577" />
+
+<area alt="" title=""  shape="poly" id="map29"  coords="633,579,717,579,717,662,674,662,674,633,666,620,633,620,633,579" />
+<area alt="" title=""  shape="poly" id="map30"  coords="633,749,717,749,717,666,674,666,674,698,666,709,633,709,633,749" />
+
+             <area alt="" title=""  shape="poly" id="map31"  coords="6,32,122,32,122,77,98,85,75,87,53,87,24,85,6,77,6,32"  />
+<area alt="" title=""  shape="poly" id="map32"  coords="190,32,302,32,302,77,280,85,260,87,238,87,209,85, 190,77 ,190,32" />
+<area alt="" title=""  shape="poly" id="map33"  coords="426,32,540,32,540,77,522,85,493,87,472,87,445,85,426,77,426,32" />
+<area alt="" title=""  shape="poly" id="map34"  coords="602,32,716,32,716,77,704,85,675,87,646,87,617,85, 602,77,602,32 " />
+
+<area alt="" title=""  shape="poly" id="map35"  coords="458,955,493,955,507,949,520,949,531,953,538,955,570,955,570,905,536,898,504,898,478,901,461,904,457,909" />
+ 
+                   
+                    </map>
+                      <div class="desc"><a href="#"></a></div>
+          </div>
+          <div id="dropdowncontent2" class="dropdown-content2 dc">
+           <asp:Panel runat="server" ID="pnlhd2" CssClass="pnlhd pnlhd2"></asp:Panel>
+            <asp:Image ID="Image2" runat="server" ImageUrl="../Acc/right.png" usemap="#Image2" CssClass="map" />
+              <map  id="Map1" class="tabs" name="Image2">
+
+                <!-- left -->
+              <area alt="" title=""  shape="poly" id="map36" coords="299,35,355,35,355,118,299,118,299,35" />
+              <area alt="" title=""  shape="poly" id="map37" coords="240,122,295,122,295,202,240,202,240,122" />
+              <area alt="" title=""  shape="poly" id="map38" coords="299,122,355,122,355,202,299,202,299,122" />
+
+              <area alt="" title=""  shape="poly" id="map39" coords="240,308,295,308,295,390,240,390,240,308" />
+              <area alt="" title=""  shape="poly" id="map40" coords="240,394,295,394,295,475,240,475,240,394" />
+              <area alt="" title=""  shape="poly" id="map41" coords="299,308,355,308,355,390,299,390,299,308" />
+              <area alt="" title=""  shape="poly" id="map42" coords="299,394,355,394,355,475,299,475,299,394" />  
+               
+               
+              <area alt="" title=""  shape="poly" id="map43" coords="517,35,572,35,572,118,517,118,517,35" />
+              <area alt="" title=""  shape="poly" id="map44" coords="517,122,572,122,572,202,517,202,517,122" />
+              <area alt="" title=""  shape="poly" id="map45" coords="575,35,628,35,628,118,575,118,575,35" />
+              <area alt="" title=""  shape="poly" id="map46" coords="575,122,630,122,630,202,575,202,575,122" />
+
+              <area alt="" title=""  shape="poly" id="map47" coords="517,308,572,308,572,390,517,390,517,308" />
+              <area alt="" title=""  shape="poly" id="map48" coords="517,394,572,394,572,475,517,475,517,394" />
+              <area alt="" title=""  shape="poly" id="map49" coords="575,308,630,308,630,390,575,390,575,308" />
+              <area alt="" title=""  shape="poly" id="map50" coords="575,393,630,393,630,475,575,475,575,393" />
+               
+               
+                <area alt="" title=""  shape="poly" id="map51" coords="517,522,573,522,573,608,517,608,517,522" />
+                <area alt="" title=""  shape="poly" id="map52" coords="517,610,572,610,572,694,517,694,517,610" />
+                <area alt="" title=""  shape="poly" id="map53" coords="575,522,631,522,631,608,575,608,575,522" />
+                <area alt="" title=""  shape="poly" id="map54" coords="575,610,631,610,631,694,575,694,575,610" />
+                <area alt="" title=""  shape="poly" id="map55" coords="240,35,295,35,295,118,240,118,240,35" />
+                <!-- right  -->
+                 
+                <!--bottom right-->
+                <area alt="" title=""  shape="poly" id="map56" coords="517,750,573,750,573,833,517,833,517,750" />
+                <area alt="" title=""  shape="poly" id="map57" coords="517,837,572,837,572,920,517,920,517,837" />
+
+                <area alt="" title=""  shape="poly" id="map58" coords="575,750,631,750,631,833,575,833,575,750" />
+                <area alt="" title=""  shape="poly" id="map59" coords="575,837,631,837,631,920,575,920,575,837" />
+               
+                <!--bottom left-->
+                <area alt="" title=""  shape="poly" id="map60" coords="240,750,296,750,296,836,240,836,240,750" />
+                <area alt="" title=""  shape="poly" id="map61" coords="240,839,296,839,296,920,240,920,240,837" />
+                
+                <area alt="" title=""  shape="poly" id="map62" coords="300,750,355,750,355,833,300,833,300,750" />
+                <area alt="" title=""  shape="poly" id="map63" coords="300,837,355,837,355,920,300,920,300,837" />
+               
+              </map>
+            <div class="desc"><a href="#"></a></div>
+          </div>
+          
+          <div id="dropdowncontent3" class="dropdown-content3 dc" >
+            <div style="" >
+                <iframe src="PopUp/list2.aspx"  clASS="map1" id="frame1" runat="server"></iframe>
+                <div class="desc"><a href="#"></a></div>
+            </div>
+          </div>
+            
+            <div id="dropdowncontent4" class="dropdown-content4 dc" >
+            <div style="" >
+                <iframe src="PopUp/list3.aspx"  clASS="map1" id="Iframe2" runat="server"></iframe>
+                <div class="desc"><a href="#"></a></div>
+            </div>
+          </div>
+        </div>
+    </div>
+    
+
+</div>
+<%--<div class="footer">
+<MARQUEE WIDTH=""100%"">Welcome To TMS</MARQUEE>
+</div>--%>
+</asp:Content>
+
