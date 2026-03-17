@@ -56,7 +56,7 @@ namespace BLL
                 }
                 else
                 {
-                    _Dal.RollBack();
+                    _Dal.Rollback();
                 }
 
                 return result;

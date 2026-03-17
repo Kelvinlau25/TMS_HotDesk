@@ -21,37 +21,37 @@ namespace Object
             _DATE_JOIN = date_join;
         }
 
-        public object Company
+        public string Company
         {
             get { return _COMPANY; }
         }
 
-        public object Organization
+        public string Organization
         {
             get { return _ORGANIZATION; }
         }
 
-        public object UserID
+        public string UserID
         {
             get { return _USER_ID; }
         }
 
-        public object Username
+        public string Username
         {
             get { return _USR_NAME; }
         }
 
-        public object Name
+        public string Name
         {
             get { return _EMP_NAME; }
         }
 
-        public object Email
+        public string Email
         {
             get { return _USR_EMAIL; }
         }
 
-        public object DateJoin
+        public System.DateTime DateJoin
         {
             get { return _DATE_JOIN; }
         }
