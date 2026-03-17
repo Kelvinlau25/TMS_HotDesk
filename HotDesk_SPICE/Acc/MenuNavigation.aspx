@@ -394,7 +394,8 @@ Chong, Charlene/TMS(MY)/Charlene Chong Seok Yun(Application Solution Sect Mgr) w
 <area alt="" title=""  shape="poly" id="map1"  coords="6,32,6,79,62,88,121,82,120,30,90,31,64,37,42,32" />
 <area alt="" title=""  shape="poly" id="map2"  coords="189,31,189,78,246,89,304,81,303,32,269,33,247,36,225,31" />
 <area alt="" title=""  shape="poly" id="map3"  coords="426,32,426,79,483,90,541,82,540,33,510,31,484,37,462,32" />
-<area alt="" title=""  shape="poly" id="map4"  coords="600,33,600,80,656,89,715,83,714,31,684,32,658,38,636,33" />
+<%-- Remove the area to prevent user check-in the specific place --%>
+<%--<area alt="" title=""  shape="poly" id="map4"  coords="600,33,600,80,656,89,715,83,714,31,684,32,658,38,636,33" />--%>
  
 <area alt="" title=""  shape="poly" id="map5"  coords="212,206,211,290,128,290,128,247,167,247,168,206" />
 <area alt="" title=""  shape="poly" id="map6"  coords="214,205,213,291,298,291,298,251,258,246,255,205" />
@@ -415,8 +416,8 @@ Chong, Charlene/TMS(MY)/Charlene Chong Seok Yun(Application Solution Sect Mgr) w
 <area alt="" title=""  shape="poly" id="map20"  coords="460,515,458,599,503,600,505,557,545,555,544,515" />
 <area alt="" title=""  shape="poly" id="map21"  coords="212,685,211,601,170,601,167,642,128,643,127,685" />
 <area alt="" title=""  shape="poly" id="map22"  coords="213,599,213,684,299,684,297,643,259,641,256,599" />
-<area alt="" title=""  shape="poly" id="map23"  coords="459,601,460,686,545,685,543,646,505,642,503,601" />
-<area alt="" title=""  shape="poly" id="map24"  coords="459,683,458,599,414,598,414,640,374,644,374,683" />
+<area alt="" title=""  shape="poly" id="map23"  coords="459,683,458,599,414,598,414,640,374,644,374,683" />
+<area alt="" title=""  shape="poly" id="map24"  coords="459,601,460,686,545,685,543,646,505,642,503,601" />
 <area alt="" title=""  shape="poly" id="map25"  coords="127,687,212,686,211,771,167,770,167,728,126,728" />
 <area alt="" title=""  shape="poly" id="map26"  coords="215,685,213,769,258,770,260,727,300,727,299,685" />
 <area alt="" title=""  shape="poly" id="map27"  coords="374,685,459,684,458,769,417,770,414,728,376,727" />
@@ -436,18 +437,18 @@ Chong, Charlene/TMS(MY)/Charlene Chong Seok Yun(Application Solution Sect Mgr) w
                     <asp:Image ID="Image2" runat="server" ImageUrl="../Acc/right.png" usemap="#Image2" CssClass="map" />
                   
                     <map id="Map1" class="tabs" name="Image2">
-                        <!-- left -->
+                        <%--<!-- left -->
                         <area title=""  shape="rect" id="map36" coords="207,63,300,92" />
                         <area title=""  shape="rect" id="map37" coords="207,95,298,122" />
                         <area title=""  shape="rect" id="map38" coords="302,95,393,121" />
                         <area title=""  shape="rect" id="map39" coords="237,223,288,302" />
                         <area title=""  shape="rect" id="map40" coords="235,308,287,385" />
                         <area title=""  shape="rect" id="map41" coords="295,223,345,302" />
-                        <area title=""  shape="rect" id="map42" coords="295,310,345,386" />  
-                        <%--<area title=""  shape="rect" id="map43" coords="561,59,714,122" />--%>
-                      <%--  <area title=""  shape="rect" id="map44" coords="479,94,569,120" />
+                        <area title=""  shape="rect" id="map42" coords="295,310,345,386" /> 
+                        <area title=""  shape="rect" id="map43" coords="561,59,714,122" />
+                        <area title=""  shape="rect" id="map44" coords="479,94,569,120" />
                         <area title=""  shape="rect" id="map45" coords="575,62,665,88" />
-                        <area title=""  shape="rect" id="map46" coords="575,94,665,120" />--%>
+                        <area title=""  shape="rect" id="map46" coords="575,94,665,120" />
                         <area title=""  shape="rect" id="map47" coords="516,198,567,278" />
                         <area title=""  shape="rect" id="map48" coords="517,287,565,362" />
                         <area title=""  shape="rect" id="map49" coords="575,199,623,278" />
@@ -458,10 +459,10 @@ Chong, Charlene/TMS(MY)/Charlene Chong Seok Yun(Application Solution Sect Mgr) w
                         <area title=""  shape="rect" id="map54" coords="573,479,624,557" />
                         <area title=""  shape="rect" id="map55" coords="303,65,395,90" />
 
-                        <%--added by ChristopherLeong 20200505 --> add 2 new desk--%>
+                        added by ChristopherLeong 20200505 --> add 2 new desk
                         <area title=""  shape="rect" id="map64" coords="238,448,287,525" />
                         <area title=""  shape="rect" id="map65" coords="296,448,344,525" /> 
-                         <%--added by Goh Jin Hau --> added 2 new desks--%>
+                         added by Goh Jin Hau --> added 2 new desks
                         <area title=""  shape="rect" id="map66" coords="236,533,287,610" /> 
                         <area title=""  shape="rect" id="map67" coords="295,533,344,611" /> 
                     
@@ -480,11 +481,51 @@ Chong, Charlene/TMS(MY)/Charlene Chong Seok Yun(Application Solution Sect Mgr) w
                         <area title=""  shape="rect" id="map63" coords="295,879,349,957" />
 
 
-                         <%--added by Goh Jin Hau 20230106 --> added 4 new desks--%>
+                         added by Goh Jin Hau 20230106 --> added 4 new desks
                         <area title=""  shape="rect" id="map68" coords="517,792,570,870" /> 
                         <area title=""  shape="rect" id="map69" coords="577,795,626,869" /> 
                         <area title=""  shape="rect" id="map70" coords="519,878,569,956" /> 
-                        <area title=""  shape="rect" id="map71" coords="578,878,627,956" /> 
+                        <area title=""  shape="rect" id="map71" coords="578,878,627,956" />--%>
+
+                        <%-- 20260313 by Wilson, change the layout for IToT Hall --%>
+                        <%-- 4 besides 6 pax meeting table (1st top row)--%>
+                         <area alt="" title=""  shape="rect" id="map36" coords="243,47,337,80" />
+                         <area alt="" title=""  shape="rect" id="map37" coords="341,48,434,80" />
+                         <area alt="" title=""  shape="rect" id="map38" coords="244,85,338,117" />
+                         <area alt="" title=""  shape="rect" id="map39" coords="341,82,434,117" />
+                        <%-- 2nd row tables --%>
+                         <area alt="" title=""  shape="poly" id="map40" coords="256,224,244,254,330,289,343,259" />
+                         <area alt="" title=""  shape="poly" id="map41" coords="346,259,333,291,420,325,433,295" />
+                         <area alt="" title=""  shape="poly" id="map42" coords="243,258,230,288,316,323,329,292" /> 
+                         <area alt="" title=""  shape="poly" id="map47" coords="331,293,320,324,406,359,418,329" />
+                         <area alt="" title=""  shape="poly" id="map48" coords="526,224,515,254,600,288,612,259" />
+                         <area alt="" title=""  shape="poly" id="map49" coords="616,260,603,290,690,325,702,295" />
+                         <area alt="" title=""  shape="poly" id="map50" coords="512,259,500,287,586,322,598,293" />
+                         <area alt="" title=""  shape="poly" id="map51" coords="603,293,591,324,676,359,688,329" />
+                        <%-- 3rd row tables --%>
+                         <area alt="" title=""  shape="poly" id="map52" coords="255,423,243,455,329,488,342,459" />
+                         <area alt="" title=""  shape="poly" id="map53" coords="345,459,333,490,419,524,431,495" />
+                         <area alt="" title=""  shape="poly" id="map54" coords="242,458,230,487,315,522,327,492" />
+                         <area alt="" title=""  shape="poly" id="map55" coords="331,494,319,524,405,558,417,529" />
+                         <area alt="" title=""  shape="rect" id="map56" coords="503,465,598,499" />
+                         <area alt="" title=""  shape="rect" id="map57" coords="603,467,694,498" />
+                         <area alt="" title=""  shape="rect" id="map58" coords="505,502,598,535" />
+                         <area alt="" title=""  shape="rect" id="map59" coords="603,503,694,535" />
+                        <%-- 4th row tables --%>
+                         <area alt="" title=""  shape="poly" id="map60" coords="78,676,62,702,137,745,152,719" />
+                         <area alt="" title=""  shape="poly" id="map61" coords="156,720,140,746,214,788,230,761" />
+                         <area alt="" title=""  shape="poly" id="map62" coords="230,763,217,789,292,832,307,807" />
+                         <area alt="" title=""  shape="poly" id="map63" coords="310,809,296,834,369,876,384,851" />
+                         <area alt="" title=""  shape="poly" id="map64" coords="61,705,46,732,120,773,135,748" />
+                         <area alt="" title=""  shape="poly" id="map65" coords="138,750,124,775,197,817,212,791" />
+                         <area alt="" title=""  shape="poly" id="map66" coords="215,793,200,819,275,862,290,836" />
+                         <area alt="" title=""  shape="poly" id="map66" coords="215,793,200,819,275,862,290,836" />
+                         <area alt="" title=""  shape="poly" id="map66" coords="215,793,200,819,275,862,290,836" />
+                         <area alt="" title=""  shape="poly" id="map67" coords="293,838,278,863,353,906,368,881" />
+                         <area alt="" title=""  shape="poly" id="map68" coords="486,707,498,737,584,702,572,673" /> 
+                         <area alt="" title=""  shape="poly" id="map69" coords="576,670,588,701,674,666,662,636" /> 
+                         <area alt="" title=""  shape="poly" id="map70" coords="499,740,512,770,599,735,586,705" /> 
+                         <area alt="" title=""  shape="poly" id="map71" coords="590,705,602,734,688,700,676,671" />
                     </map>
                 
                     <div class="desc"><a href="#"></a></div>
