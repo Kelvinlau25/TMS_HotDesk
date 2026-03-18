@@ -1,4 +1,4 @@
-﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="Menu.aspx.vb" Inherits="Style2_Menu" %>
+﻿<%@ Page Language="C#" AutoEventWireup="false" CodeFile="Menu.aspx.cs" Inherits="Style2_Menu" %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 

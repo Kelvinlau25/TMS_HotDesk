@@ -1,4 +1,4 @@
-﻿<%@ Page Language="VB" MasterPageFile="~/master/Main.master" AutoEventWireup="false" CodeFile="Main_MenuNavigation.aspx.vb" Inherits="Acc_Main_MenuNavigation" title="TMS PRAI Hot Desking Home Page" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/master/Main.master" AutoEventWireup="false" CodeFile="Main_MenuNavigation.aspx.cs" Inherits="Acc_Main_MenuNavigation" title="TMS PRAI Hot Desking Home Page" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 <style>

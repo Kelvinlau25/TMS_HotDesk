@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="VB" MasterPageFile="~/Master/Main.master" AutoEventWireup="false" CodeFile="Log.aspx.vb" Inherits="Log" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master/Main.master" AutoEventWireup="false" CodeFile="Log.aspx.cs" Inherits="Log" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 <link href="<%= ResolveUrl("~/css/Detail.css") %>" rel="stylesheet" type="text/css" />

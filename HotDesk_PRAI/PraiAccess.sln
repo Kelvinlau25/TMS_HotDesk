@@ -24,17 +24,17 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "TMS_HotDesk_Prai", ".", "{5
 		VWDPort = "5348"
 	EndProjectSection
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Library.Common", "Library\Library.Common\Library.Common.vbproj", "{1322656D-2FAA-4F49-A511-3696DFC1D29C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library.Common", "Library\Library.Common\Library.Common.csproj", "{1322656D-2FAA-4F49-A511-3696DFC1D29C}"
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Library.Control.Base", "Library\Library.Control.Base\Library.Control.Base.vbproj", "{D4618A4B-AAEE-415B-AF2C-0874920E87C3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library.Control.Base", "Library\Library.Control.Base\Library.Control.Base.csproj", "{D4618A4B-AAEE-415B-AF2C-0874920E87C3}"
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Library.Root", "Library\Library.Root\Library.Root.vbproj", "{4695AB18-FF22-4CEF-98C0-C413082AA932}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library.Root", "Library\Library.Root\Library.Root.csproj", "{4695AB18-FF22-4CEF-98C0-C413082AA932}"
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Library.SQLServer", "Library\Library.SQLServer\Library.SQLServer.vbproj", "{0A1F849F-46BC-4255-A499-7D1F76055D36}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library.SQLServer", "Library\Library.SQLServer\Library.SQLServer.csproj", "{0A1F849F-46BC-4255-A499-7D1F76055D36}"
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Library.Database", "Library\Library.Database\Library.Database.vbproj", "{55AE13FA-8E18-493E-9BFB-5130A9BF3DB5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library.Database", "Library\Library.Database\Library.Database.csproj", "{55AE13FA-8E18-493E-9BFB-5130A9BF3DB5}"
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Library.Oracle", "Library\Library.Oracle\Library.Oracle.vbproj", "{88F0907B-957B-4389-8CEE-08EB846EF8BA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library.Oracle", "Library\Library.Oracle\Library.Oracle.csproj", "{88F0907B-957B-4389-8CEE-08EB846EF8BA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

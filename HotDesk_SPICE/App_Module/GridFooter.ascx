@@ -1,4 +1,4 @@
-﻿<%@ Control Language="VB" ClassName="GridFooter" AutoEventWireup="false" CodeFile="GridFooter.ascx.vb" Inherits="UserControl_GridFooter" %>
+﻿<%@ Control Language="C#" ClassName="GridFooter" AutoEventWireup="false" CodeFile="GridFooter.ascx.cs" Inherits="UserControl_GridFooter" %>
 <table class="navigatorbar" width="100%">
     <tr>
         <th align="right" valign="middle" style="height: 20px">

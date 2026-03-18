@@ -1,4 +1,4 @@
-﻿<%@ Control Language="VB" AutoEventWireup="false" CodeFile="RangeValidator.ascx.vb"
+﻿<%@ Control Language="C#" AutoEventWireup="false" CodeFile="RangeValidator.ascx.cs"
     Inherits="App_Module_RangeValidator" %>
  <%  If cvRange.Type = ValidationDataType.Date Then
          txtbox1.Attributes.Add("ReadOnly", "True")

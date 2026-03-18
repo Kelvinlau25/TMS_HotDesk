@@ -1,4 +1,4 @@
-﻿<%@ Control Language="VB" ClassName="Search" AutoEventWireup="false" CodeFile="Search.ascx.vb" EnableViewState="true" Inherits="Search" %>
+﻿<%@ Control Language="C#" ClassName="Search" AutoEventWireup="false" CodeFile="Search.ascx.cs" EnableViewState="true" Inherits="Search" %>
 <div id='searchMsg'>
     <h3><asp:Label ID="lblSearch" runat="server" Text="Basic Search" /></h3>
     <asp:Panel ID="pnlBasic" runat="server">
