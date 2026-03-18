@@ -1,4 +1,4 @@
-﻿<%@ Page Language="VB" MasterPageFile="~/master/Main.master" AutoEventWireup="false" CodeFile="List.aspx.vb" Inherits="Acc_PopUp_List" title="Check In List" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/master/Main.master" AutoEventWireup="false" CodeFile="List.aspx.cs" Inherits="Acc_PopUp_List" title="Check In List" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 <link href="../../css_new/TMSAccessList2.css" rel="stylesheet" type="text/css" />

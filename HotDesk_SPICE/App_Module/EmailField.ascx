@@ -1,4 +1,4 @@
-﻿<%@ Control Language="VB" AutoEventWireup="false" CodeFile="EmailField.ascx.vb" Inherits="App_Module_EmailField" %>
+﻿<%@ Control Language="C#" AutoEventWireup="false" CodeFile="EmailField.ascx.cs" Inherits="App_Module_EmailField" %>
 <div class="row <%= IIf(Not String.IsNullOrEmpty(Me.CssClass), " " & Me.CssClass, String.Empty) %> ">
     <div class="label" id="pnlEmail" runat="server"><asp:label ID="lblEmail" runat="server" Text="Email Address"></asp:label> </div>
     <div class="input">

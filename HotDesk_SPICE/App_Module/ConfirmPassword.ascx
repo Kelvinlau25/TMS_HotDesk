@@ -1,4 +1,4 @@
-﻿<%@ Control Language="VB" AutoEventWireup="false" CodeFile="ConfirmPassword.ascx.vb" Inherits="App_Module_ConfirmPassword" %>
+﻿<%@ Control Language="C#" AutoEventWireup="false" CodeFile="ConfirmPassword.ascx.cs" Inherits="App_Module_ConfirmPassword" %>
 <div class="container">
 <asp:Label ID="lblPassword" runat="server" Text="Password: "></asp:Label>
     <asp:TextBox ID="txtPassword" runat="server">

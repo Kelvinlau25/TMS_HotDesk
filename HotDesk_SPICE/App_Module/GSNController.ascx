@@ -1,4 +1,4 @@
-﻿<%@ Control Language="VB" AutoEventWireup="false" CodeFile="GSNController.ascx.vb" Inherits="App_Module_Controller_GSN" %>
+﻿<%@ Control Language="C#" AutoEventWireup="false" CodeFile="GSNController.ascx.cs" Inherits="App_Module_Controller_GSN" %>
 <asp:Panel ID="pninfo" runat="server">
 <div class="createdpanel">
     <table class="loginfo">

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="list2.aspx.vb" Inherits="Acc_PopUp_list2" %>
+﻿<%@ Page Language="C#" AutoEventWireup="false" CodeFile="list2.aspx.cs" Inherits="Acc_PopUp_list2" %>
 
 <!DOCTYPE html>
 

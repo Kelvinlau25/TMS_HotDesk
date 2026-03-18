@@ -1,4 +1,4 @@
-﻿<%@ Page Language="VB" MasterPageFile="~/master/Main.master" AutoEventWireup="false" CodeFile="MenuNavigation.aspx.vb" Inherits="Acc_MenuNavigation" title="TMS Check In" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/master/Main.master" AutoEventWireup="false" CodeFile="MenuNavigation.aspx.cs" Inherits="Acc_MenuNavigation" title="TMS Check In" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="LastArm.aspx.vb" Inherits="Acc_PopUp_LastArm" %>
+﻿<%@ Page Language="C#" AutoEventWireup="false" CodeFile="LastArm.aspx.cs" Inherits="Acc_PopUp_LastArm" %>
 
 <!DOCTYPE html>
 
