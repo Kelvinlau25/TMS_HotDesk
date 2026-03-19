@@ -1,4 +1,4 @@
-namespace Control
+namespace Library.Root.Control
 {
     public class MessageCenter
     {

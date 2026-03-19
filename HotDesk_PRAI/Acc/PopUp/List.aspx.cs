@@ -2,7 +2,7 @@ using System;
 
 public partial class Acc_PopUp_List : Control.Base
 {
-    private Library.Database.ListCollection _list;
+    private ListCollection _list;
     protected string _staffID = string.Empty;
     protected string _staffName = string.Empty;
 
@@ -25,7 +25,7 @@ public partial class Acc_PopUp_List : Control.Base
 
     public override void BindData()
     {
-        _list = Library.Database.BLL.HotSeat.List(base.PageNo);
+        _list = BLL.HotSeat.List(base.PageNo);
         grdResult.DataSource = _list.Data;
         grdResult.DataBind();
 

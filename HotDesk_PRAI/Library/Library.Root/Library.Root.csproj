@@ -7,7 +7,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Library.Root</RootNamespace>
     <AssemblyName>Library.Root</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -30,21 +30,21 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
-    <Reference Include="System.Web.Extensions">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Forms" />    
     <Reference Include="System.Xml" />
-    <Reference Include="System.Core">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
+    <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Component\LocalLabel.cs" />
-    <Compile Include="Control\Base.cs" />
+    <Compile Include="Control\Base.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Control\Convertion.cs" />
     <Compile Include="Control\GenericCollection.cs" />
-    <Compile Include="Control\LogBase.cs" />
+    <Compile Include="Control\LogBase.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Control\MessageCenter.cs" />
     <Compile Include="Object\Base.cs" />
     <Compile Include="Object\Binder.cs" />

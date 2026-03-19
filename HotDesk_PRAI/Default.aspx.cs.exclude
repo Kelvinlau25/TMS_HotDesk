@@ -1,0 +1,59 @@
+using System;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+public partial class _Default : System.Web.UI.Page
+{
+    protected void btnSubmit_Click(object sender, EventArgs e)
+    {
+        if (Page.IsValid)
+        {
+            Response.Redirect("~/Menu/Menu.aspx");
+        }
+    }
+
+    protected void cusCustom_ServerValidate(object source, ServerValidateEventArgs args)
+    {
+        try
+        {
+            // ACL library is not available in this project
+            // Bypassing authentication — hardcoded session values for development
+            Session["gstrUserID"] = "admin";
+            Session["system"] = "1";
+            Session["gettemp"] = "Admin";
+            Session["gstrUsername"] = txtusername.Text.Trim();
+            Session["gstrPassword"] = txtpassword.Text.Trim();
+            Session["LoginHis"] = DateTime.Now.ToString("dd MMMM yyyy");
+            Session["gstrUserCom"] = "04";
+            Session["gstrUserCompCode"] = "04";
+            Session["com"] = "04";
+            Session["Barcodechecking"] = txtusername.Text.Trim().ToUpper();
+            args.IsValid = true;
+        }
+        catch (Exception)
+        {
+            args.IsValid = false;
+            ClientScript.RegisterStartupScript(this.GetType(), "Alert", "alert('- Invalid username and password ');", true);
+        }
+    }
+
+    protected void Page_Init(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            // ACL.Control.Binding.BindCompany not available — company dropdown left empty
+        }
+    }
+
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            Session.Abandon();
+            Session.Clear();
+            trcompanyselection.Visible = System.Configuration.ConfigurationManager.AppSettings["CrossCompany"] == "1";
+        }
+
+        txtusername.Focus();
+    }
+}

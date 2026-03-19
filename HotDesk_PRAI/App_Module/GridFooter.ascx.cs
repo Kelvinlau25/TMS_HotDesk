@@ -1,9 +1,10 @@
 using System;
+using Library.Root.Control;
 
 public partial class UserControl_GridFooter : System.Web.UI.UserControl
 {
-    private Control.Base setting;
-    private Control.LogBase logSetting;
+    private Library.Root.Control.Base setting;
+    private Library.Root.Control.LogBase logSetting;
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -38,13 +39,13 @@ public partial class UserControl_GridFooter : System.Web.UI.UserControl
     {
         if (_audit)
         {
-            logSetting = (Control.LogBase)this.Page;
+            logSetting = (Library.Root.Control.LogBase)this.Page;
             logSetting.PageNo = int.Parse(ddlPage.SelectedItem.Text);
             Response.Redirect(logSetting.GenerateList);
         }
         else
         {
-            setting = (Control.Base)this.Page;
+            setting = (Library.Root.Control.Base)this.Page;
             setting.PageNo = int.Parse(ddlPage.SelectedItem.Text);
             Response.Redirect(setting.GenerateList);
         }
@@ -54,7 +55,7 @@ public partial class UserControl_GridFooter : System.Web.UI.UserControl
     {
         if (_audit)
         {
-            logSetting = (Control.LogBase)this.Page;
+            logSetting = (Library.Root.Control.LogBase)this.Page;
             if (ddlPage.Items.Count > 0)
             {
                 if (logSetting.PageNo >= int.Parse(ddlPage.Items[ddlPage.Items.Count - 1].Value)) return;
@@ -65,7 +66,7 @@ public partial class UserControl_GridFooter : System.Web.UI.UserControl
         }
         else
         {
-            setting = (Control.Base)this.Page;
+            setting = (Library.Root.Control.Base)this.Page;
             if (ddlPage.Items.Count > 0)
             {
                 if (setting.PageNo >= int.Parse(ddlPage.Items[ddlPage.Items.Count - 1].Value)) return;
@@ -80,14 +81,14 @@ public partial class UserControl_GridFooter : System.Web.UI.UserControl
     {
         if (_audit)
         {
-            logSetting = (Control.LogBase)this.Page;
+            logSetting = (Library.Root.Control.LogBase)this.Page;
             if (logSetting.PageNo <= 0) return;
             logSetting.PageNo = logSetting.PageNo - 1;
             Response.Redirect(logSetting.GenerateList);
         }
         else
         {
-            setting = (Control.Base)this.Page;
+            setting = (Library.Root.Control.Base)this.Page;
             if (setting.PageNo <= 0) return;
             setting.PageNo = setting.PageNo - 1;
             Response.Redirect(setting.GenerateList);
@@ -98,13 +99,13 @@ public partial class UserControl_GridFooter : System.Web.UI.UserControl
     {
         if (_audit)
         {
-            logSetting = (Control.LogBase)this.Page;
+            logSetting = (Library.Root.Control.LogBase)this.Page;
             logSetting.PageNo = int.Parse(ddlPage.Items[ddlPage.Items.Count - 1].Value);
             Response.Redirect(logSetting.GenerateList);
         }
         else
         {
-            setting = (Control.Base)this.Page;
+            setting = (Library.Root.Control.Base)this.Page;
             setting.PageNo = int.Parse(ddlPage.Items[ddlPage.Items.Count - 1].Value);
             Response.Redirect(setting.GenerateList);
         }
@@ -114,13 +115,13 @@ public partial class UserControl_GridFooter : System.Web.UI.UserControl
     {
         if (_audit)
         {
-            logSetting = (Control.LogBase)this.Page;
+            logSetting = (Library.Root.Control.LogBase)this.Page;
             logSetting.PageNo = 1;
             Response.Redirect(logSetting.GenerateList);
         }
         else
         {
-            setting = (Control.Base)this.Page;
+            setting = (Library.Root.Control.Base)this.Page;
             setting.PageNo = 1;
             Response.Redirect(setting.GenerateList);
         }
@@ -130,12 +131,12 @@ public partial class UserControl_GridFooter : System.Web.UI.UserControl
     {
         if (_audit)
         {
-            logSetting = (Control.LogBase)this.Page;
+            logSetting = (Library.Root.Control.LogBase)this.Page;
             if (logSetting.PageNo > this._totalPage) logSetting.PageNo = this._totalPage;
         }
         else
         {
-            setting = (Control.Base)this.Page;
+            setting = (Library.Root.Control.Base)this.Page;
             if (setting.PageNo > this._totalPage) setting.PageNo = this._totalPage;
         }
 
@@ -149,9 +150,9 @@ public partial class UserControl_GridFooter : System.Web.UI.UserControl
     protected void setNavigator()
     {
         if (_audit)
-            logSetting = (Control.LogBase)this.Page;
+            logSetting = (Library.Root.Control.LogBase)this.Page;
         else
-            setting = (Control.Base)this.Page;
+            setting = (Library.Root.Control.Base)this.Page;
 
         if (this._total <= 1)
         {

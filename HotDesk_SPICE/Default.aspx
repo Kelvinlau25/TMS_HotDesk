@@ -6,7 +6,7 @@
 <head runat="server">
    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=8" /> 
-    <title><%=ConfigurationManager.AppSettings("title")%></title>
+   <%= ConfigurationManager.AppSettings["something"] %>
     <link href="css/SignIn.css" rel="stylesheet" type="text/css" />
 </head>
 <body>

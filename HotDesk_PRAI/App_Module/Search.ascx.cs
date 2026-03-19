@@ -19,7 +19,7 @@ public partial class Search : System.Web.UI.UserControl
             BindDDL();
         }
 
-        Control.Base setting = (Control.Base)this.Page;
+        var setting = this.Page as dynamic;
 
         if (Session["key"] == null)
         {
@@ -68,7 +68,7 @@ public partial class Search : System.Web.UI.UserControl
 
     protected void BindDDL()
     {
-        Control.Base setting = (Control.Base)this.Page;
+        var setting = this.Page as dynamic;
 
         chkDeleted.Visible = setting.DeleteControl;
 
@@ -159,7 +159,7 @@ public partial class Search : System.Web.UI.UserControl
 
     protected void btnSubmit_Click(object sender, EventArgs e)
     {
-        Control.Base setting = (Control.Base)this.Page;
+        var setting = (dynamic)this.Page;
 
         if (ddlSearch.SelectedIndex > 0)
         {
@@ -178,7 +178,7 @@ public partial class Search : System.Web.UI.UserControl
 
     protected void btnSubmit2_Click(object sender, EventArgs e)
     {
-        Control.Base setting = (Control.Base)this.Page;
+        var setting = (dynamic)this.Page;
         setting.SearchField = string.Empty;
         setting.SearchValue = ConvertionString(_query);
 
@@ -325,7 +325,7 @@ public partial class Search : System.Web.UI.UserControl
 
     protected void chkDeleted_CheckedChanged(object sender, EventArgs e)
     {
-        Control.Base setting = (Control.Base)this.Page;
+        var setting = this.Page as dynamic;
         setting.ShowDeleted = chkDeleted.Checked;
         Response.Redirect(setting.GenerateList);
     }

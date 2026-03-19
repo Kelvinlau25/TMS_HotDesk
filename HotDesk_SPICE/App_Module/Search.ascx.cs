@@ -84,8 +84,8 @@ public partial class Search : System.Web.UI.UserControl
         }
         else
         {
-            Control.Binding.BindDropDownListResource(ddlSearch, setting.SetupKey, "-", "-");
-            Control.Binding.BindDropDownListResource(ddlSearchUsing, setting.SetupKey, "-", "-");
+        Library.Root.Control.Binding.BindDropDownListResource(ddlSearch, setting.SetupKey, "-", "-");
+        Library.Root.Control.Binding.BindDropDownListResource(ddlSearchUsing, setting.SetupKey, "-", "-");
         }
     }
 
@@ -229,7 +229,7 @@ public partial class Search : System.Web.UI.UserControl
     {
         if (Value == "-")
         {
-            Library.Root.Control.MessageCenter.ShowAJAXMessageBox(this.Page, field + " was " + Resources.Message.InvalidSelect);
+            Control.MessageCenter.ShowAJAXMessageBox(this.Page, field + " was " + Resources.Message.InvalidSelect);
             return false;
         }
         return true;
@@ -239,7 +239,7 @@ public partial class Search : System.Web.UI.UserControl
     {
         if (Value.Trim() == string.Empty)
         {
-            Library.Root.Control.MessageCenter.ShowAJAXMessageBox(this.Page, string.Format(Resources.Message.FieldEmpty, Field));
+            Control.MessageCenter.ShowAJAXMessageBox(this.Page, string.Format(Resources.Message.FieldEmpty, Field));
             return false;
         }
         return true;

@@ -40,7 +40,7 @@
 <asp:Panel ID="pnconfirmation" runat="server">
     <script type="text/javascript">
         function ValidationChecked(sender, args) {
-            args.IsValid = $('#<%= rbyes.clientid() %>').is(":checked");
+            args.IsValid = $('#<%= rbyes.ClientID %>').is(":checked");
         }
     </script>
     <table class="deleteInfo">

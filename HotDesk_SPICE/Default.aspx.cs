@@ -1,6 +1,6 @@
 using System;
 using System.Web.UI;
-
+using System.Web.UI.WebControls;
 public partial class _Default : System.Web.UI.Page
 {
     protected void btnSubmit_Click(object sender, EventArgs e)
@@ -22,14 +22,21 @@ public partial class _Default : System.Web.UI.Page
 
             if (System.Configuration.ConfigurationManager.AppSettings["CrossCompany"] == "1")
             {
-                userobj = temp.validateWithRetrieveUsernCompany(ddlcompany.SelectedValue, txtusername.Text.Trim(), txtpassword.Text.Trim(), Session["system"]);
+                userobj = temp.validateWithRetrieveUsernCompany(
+                    ddlcompany.SelectedValue,
+                    txtusername.Text.Trim(),
+                    txtpassword.Text.Trim(),
+                    Convert.ToInt32(Session["system"]));
             }
             else
             {
-                userobj = temp.validateWithRetrieveUser(txtusername.Text.Trim(), txtpassword.Text.Trim(), Session["system"]);
+                userobj = temp.validateWithRetrieveUser(
+                    txtusername.Text.Trim(),
+                    txtpassword.Text.Trim(),
+                    Convert.ToInt32(Session["system"]));
             }
 
-            if (userobj.UserID > -1)
+            if (Convert.ToInt32(userobj.UserID) > -1)
             {
                 Session["gstrUserID"] = "admin";
                 Session["gettemp"] = userobj.EmployeeName;

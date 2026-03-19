@@ -1,5 +1,6 @@
 using System.Data;
 using System.Data.SqlClient;
+using Library.Database;
 
 namespace DAL
 {
@@ -18,10 +19,6 @@ namespace DAL
         {
             ListCollection result = new ListCollection();
 
-            var dt = new DataTable();
-            var ct = new DataTable();
-            var ds = new DataSet();
-
             base._cmd.CommandText = "SP_GET_CHECK_IN_STAFF";
             base._cmd.CommandType = CommandType.StoredProcedure;
             base._cmd.CommandTimeout = 0;
@@ -30,12 +27,7 @@ namespace DAL
             base._cmd.Parameters.Add(new SqlParameter("@ToRowno", toRowNo)).Direction = ParameterDirection.Input;
 
             base._rdr = base._cmd.ExecuteReader();
-            result.Data.Load(_rdr);
-
-            while (base._rdr.Read())
-            {
-                result.TotalRow = (int)_rdr["COUNTER"];
-            }
+            result.Data.Load(base._rdr);
 
             return result;
         }
@@ -52,7 +44,7 @@ namespace DAL
             base._cmd.Parameters.Add(new SqlParameter("@pID", id)).Direction = ParameterDirection.Input;
 
             base._rdr = base._cmd.ExecuteReader();
-            result.Load(_rdr);
+            result.Load(base._rdr);
 
             return result;
         }

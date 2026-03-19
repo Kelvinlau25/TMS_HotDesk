@@ -1,5 +1,4 @@
-using Oracle.DataAccess.Client;
-using Library.Database.IntranetPortal.BLL;
+using Oracle.ManagedDataAccess.Client;
 using System.Data;
 
 namespace DAL

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Other
+namespace Library.Root.Other
 {
     /// <summary>
     /// Generic Collection

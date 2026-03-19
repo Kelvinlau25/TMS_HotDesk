@@ -2,7 +2,7 @@ using Library.Root.Object;
 using System.Collections.Generic;
 using System.Web;
 
-namespace Control
+namespace Library.Root.Control
 {
     /// <summary>
     /// Component Binding 
@@ -13,7 +13,9 @@ namespace Control
     {
         public static void BindDropDownListResource(System.Web.UI.WebControls.DropDownList DDL, string ResourceName, string Text = "", string Value = "")
         {
-            DDL.DataSource = Library.Root.Control.Convertion<Binder>.Deserializer(HttpContext.GetGlobalResourceObject("SearchSource", ResourceName));
+            var resource = HttpContext.GetGlobalResourceObject("SearchSource", ResourceName).ToString();
+
+            DDL.DataSource = Library.Root.Control.Convertion<Binder>.Deserializer(resource);
             DDL.DataTextField = "Text";
             DDL.DataValueField = "Value";
             DDL.DataBind();

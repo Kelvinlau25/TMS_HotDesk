@@ -1,6 +1,6 @@
 using System.Threading;
 
-namespace Other
+namespace Library.Root.Other
 {
     /// <summary>
     /// Handler the Common Business Logic Function

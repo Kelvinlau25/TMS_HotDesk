@@ -1,4 +1,4 @@
-namespace Object
+namespace Library.Root.Object
 {
     public class UserProfile
     {

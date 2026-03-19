@@ -1,3 +1,5 @@
+using Control;
+
 public partial class App_Module_Title : System.Web.UI.UserControl
 {
     private bool _audit = false;
@@ -10,12 +12,12 @@ public partial class App_Module_Title : System.Web.UI.UserControl
     {
         if (_audit == false)
         {
-            var setting = (Control.Base)this.Page;
-            this.lblFormTitle.Text = setting.DisplayTitle + (setting.Action != Control.Base.EnumAction.None ? " - " : string.Empty) + setting.ActionDesc;
+            Control.Base setting = (Control.Base)this.Page;
+            this.lblFormTitle.Text = setting.DisplayTitle + (setting.Action != Library.Root.Control.Base.EnumAction.None ? " - " : string.Empty) + setting.ActionDesc;
         }
         else
         {
-            var setting = (Control.LogBase)this.Page;
+            Control.LogBase setting = (Control.LogBase)this.Page;
             this.lblFormTitle.Text = setting.DisplayTitle;
         }
     }

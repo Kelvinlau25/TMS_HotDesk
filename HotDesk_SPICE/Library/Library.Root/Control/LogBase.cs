@@ -1,8 +1,12 @@
-namespace Control
+using Library.Root.Object;
+using Library.Root.Other;
+using Other;
+
+namespace Library.Root.Control
 {
     public abstract class LogBase : System.Web.UI.Page
     {
-        protected Other.GenericCollection<Object.Log> _list;
+        protected GenericCollection<Log> _list;
 
         protected override void OnInit(System.EventArgs e)
         {

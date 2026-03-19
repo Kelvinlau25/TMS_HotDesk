@@ -6,7 +6,7 @@ namespace BLL
     {
         public static ListCollection List(string table, string searchField, string searchValue, string sortField, int direction, int page, int deleted)
         {
-            using (var _dal = new DAL.MenuNav())
+            using (DAL.MenuNav _dal = new DAL.MenuNav())
             {
                 // Validation the parameter value
                 if (direction != 1)
@@ -20,7 +20,7 @@ namespace BLL
 
         public static DataTable GetIDList()
         {
-            using (var _dal = new DAL.MenuNav())
+            using (DAL.MenuNav _dal = new DAL.MenuNav())
             {
                 return _dal.GetIDList();
             }
@@ -28,7 +28,7 @@ namespace BLL
 
         public static DataTable GetPalletData()
         {
-            using (var _dal = new DAL.MenuNav())
+            using (DAL.MenuNav _dal = new DAL.MenuNav())
             {
                 return _dal.GetPalletData();
             }
@@ -36,7 +36,7 @@ namespace BLL
 
         public static DataTable GetData(string id)
         {
-            using (var _dal = new DAL.MenuNav())
+            using (DAL.MenuNav _dal = new DAL.MenuNav())
             {
                 return _dal.GetData(id);
             }
@@ -44,7 +44,7 @@ namespace BLL
 
         public static string Maint(string id, string mods, string recType)
         {
-            using (var _Dal = new DAL.MenuNav())
+            using (DAL.MenuNav _Dal = new DAL.MenuNav())
             {
                 string str = System.Web.HttpContext.Current.Session["gstrUserID"].ToString();
                 string cc = System.Web.HttpContext.Current.Session["gstrUserCompCode"].ToString();

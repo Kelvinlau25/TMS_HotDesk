@@ -15,11 +15,11 @@ namespace Control
     /// Remark : The default sort property will determine wherether the url is check or not
     /// check ( if the url failed retrieve the sort field then will generete and redirect its
     /// -------------------------------------------------------------------------------
-    /// C.C.Yeon    25 April 2011   initial Version
+    /// C.C.Yeon    25 April 2011   initial Version 
     /// C.C.Yeon    12 May   2011   Add FucntionControl Property
     /// </summary>
     public abstract class Base : Library.Root.Control.Base
-    {
+    {   
         public abstract void BindData();
 
         protected override void OnLoad(System.EventArgs e)

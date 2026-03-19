@@ -1,111 +1,114 @@
-using Oracle.DataAccess.Client;
+using Oracle.ManagedDataAccess.Client;
 
-public abstract class Connection : System.IDisposable
+namespace Library.Oraclecls
 {
-    protected OracleConnection _con;
-    protected OracleCommand _cmd;
-    protected OracleDataReader _rdr;
-    protected OracleTransaction _tran;
-
-    private string _constr = string.Empty;
-    public string ConnectionString
+    public abstract class Connection : System.IDisposable
     {
-        get { return _constr; }
-        set { _constr = value; }
-    }
+        protected OracleConnection _con;
+        protected OracleCommand _cmd;
+        protected OracleDataReader _rdr;
+        protected OracleTransaction _tran;
 
-    public Connection(string connectionStringName)
-    {
-        this.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings[connectionStringName].ToString();
-
-        if (ConnectionString == string.Empty)
+        private string _constr = string.Empty;
+        public string ConnectionString
         {
-            throw new System.Exception("Invalid Connection String Name That Set At Web Config");
+            get { return _constr; }
+            set { _constr = value; }
         }
 
-        this._con = new OracleConnection(this.ConnectionString);
-        this._con.Open();
-        this._cmd = _con.CreateCommand();
-        this._tran = _con.BeginTransaction();
-    }
-
-    public string Status
-    {
-        get
+        public Connection(string connectionStringName)
         {
-            if (_con != null)
+            this.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings[connectionStringName].ToString();
+
+            if (ConnectionString == string.Empty)
             {
-                return _con.State.ToString();
+                throw new System.Exception("Invalid Connection String Name That Set At Web Config");
             }
-            else
-            {
-                return string.Empty;
-            }
+
+            this._con = new OracleConnection(this.ConnectionString);
+            this._con.Open();
+            this._cmd = _con.CreateCommand();
+            this._tran = _con.BeginTransaction();
         }
-    }
 
-    /// <summary>
-    /// Commit all the transaction
-    /// </summary>
-    public void Commit()
-    {
-        _tran.Commit();
-    }
-
-    /// <summary>
-    /// Rollback all the transaction
-    /// </summary>
-    public void RollBack()
-    {
-        _tran.Rollback();
-    }
-
-    private bool disposedValue = false;
-
-    protected virtual void Dispose(bool disposing)
-    {
-        if (!this.disposedValue)
+        public string Status
         {
-            if (disposing)
+            get
             {
-                // TODO: free other state (managed objects).
-            }
-
-            // TODO: free your own state (unmanaged objects).
-            // TODO: set large fields to null.
-
-            if (_rdr != null)
-            {
-                _rdr.Dispose();
-            }
-
-            if (_tran != null)
-            {
-                _tran.Dispose();
-            }
-
-            if (_cmd != null)
-            {
-                _cmd.Dispose();
-            }
-
-            if (_con != null)
-            {
-                if (_con.State == System.Data.ConnectionState.Open)
+                if (_con != null)
                 {
-                    _con.Close();
+                    return _con.State.ToString();
                 }
-                _con.Dispose();
+                else
+                {
+                    return string.Empty;
+                }
             }
         }
-        this.disposedValue = true;
-    }
 
-    #region IDisposable Support
-    public void Dispose()
-    {
-        Dispose(true);
-        System.GC.SuppressFinalize(this);
+        /// <summary>
+        /// Commit all the transaction
+        /// </summary>
+        public void Commit()
+        {
+            _tran.Commit();
+        }
+
+        /// <summary>
+        /// Rollback all the transaction
+        /// </summary>
+        public void RollBack()
+        {
+            _tran.Rollback();
+        }
+
+        private bool disposedValue = false;
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this.disposedValue)
+            {
+                if (disposing)
+                {
+                    // TODO: free other state (managed objects).
+                }
+
+                // TODO: free your own state (unmanaged objects).
+                // TODO: set large fields to null.
+
+                if (_rdr != null)
+                {
+                    _rdr.Dispose();
+                }
+
+                if (_tran != null)
+                {
+                    _tran.Dispose();
+                }
+
+                if (_cmd != null)
+                {
+                    _cmd.Dispose();
+                }
+
+                if (_con != null)
+                {
+                    if (_con.State == System.Data.ConnectionState.Open)
+                    {
+                        _con.Close();
+                    }
+                    _con.Dispose();
+                }
+            }
+            this.disposedValue = true;
+        }
+
+        #region IDisposable Support
+        public void Dispose()
+        {
+            Dispose(true);
+            System.GC.SuppressFinalize(this);
+        }
+        #endregion
     }
-    #endregion
 }

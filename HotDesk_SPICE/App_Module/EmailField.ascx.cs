@@ -18,6 +18,7 @@ public partial class App_Module_EmailField : BaseUserControl
     }
     #endregion
 
+
     public void BindSetting()
     {
         txtEmail.ValidationGroup = base.ValidationGroup;

@@ -11,7 +11,13 @@ public partial class App_Module_EmailField : BaseUserControl
         set { txtEmail.Text = value; }
     }
 
-    public bool CssClass
+    public string CssClass
+    {
+        get { return _cssClass; }
+        set { _cssClass = value; }
+    }
+
+    public bool LabelVisible
     {
         get { return pnlEmail.Visible; }
         set { pnlEmail.Visible = value; }

@@ -1,7 +1,7 @@
 using System.Web.Script.Serialization;
 using System.Collections.Generic;
 
-namespace Control
+namespace Library.Root.Control
 {
     public class Convertion<T>
     {

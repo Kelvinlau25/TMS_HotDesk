@@ -25,7 +25,7 @@ namespace Control
                 {
                     return GetGlobalResourceObject("SortDesc", base.SetupKey) as string;
                 }
-                catch (System.Exception)
+                catch
                 {
                     return string.Empty;
                 }

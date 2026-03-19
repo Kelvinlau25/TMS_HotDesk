@@ -34,8 +34,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Page.cs" />
-    <Compile Include="UserControl.cs" />
+    <Compile Include="Page.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

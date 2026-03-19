@@ -1,21 +1,16 @@
 using System.Data;
 using System.Data.SqlClient;
+using Library.Database;
 
 namespace DAL
 {
-    /// <summary>
-    /// CapexCapital Data Access Layer
-    /// ------------------------------------------------
-    /// 15 March 2012  C.C.Yeon Initial Version
-    /// </summary>
     public class MenuNav : Library.SQLServer.Connection
     {
         public MenuNav() : base("SQLCon")
         {
         }
 
-        // 20170809
-        internal DataTable GetIDList()
+        public DataTable GetIDList()
         {
             DataTable result = new DataTable();
 
@@ -24,19 +19,14 @@ namespace DAL
             base._cmd.CommandTimeout = 0;
 
             base._rdr = base._cmd.ExecuteReader();
-            result.Load(_rdr);
+            result.Load(base._rdr);
 
             return result;
         }
-        // end 20170809
 
-        internal ListCollection List(string table, string searchField, string searchValue, string sortField, int direction, int fromRowNo, int toRowNo, int deleted)
+        public ListCollection List(string table, string searchField, string searchValue, string sortField, int direction, int fromRowNo, int toRowNo, int deleted)
         {
             ListCollection result = new ListCollection();
-
-            var dt = new DataTable();
-            var ct = new DataTable();
-            var ds = new DataSet();
 
             base._cmd.CommandText = "PSP_TESTING_LIST_CL";
             base._cmd.CommandType = CommandType.StoredProcedure;
@@ -53,17 +43,12 @@ namespace DAL
             base._cmd.Parameters.Add(new SqlParameter("@Deleted", deleted)).Direction = ParameterDirection.Input;
 
             base._rdr = base._cmd.ExecuteReader();
-            result.Data.Load(_rdr);
-
-            while (base._rdr.Read())
-            {
-                result.TotalRow = (int)_rdr["COUNTER"];
-            }
+            result.Data.Load(base._rdr);
 
             return result;
         }
 
-        internal DataTable GetData(string id)
+        public DataTable GetData(string id)
         {
             DataTable result = new DataTable();
 
@@ -75,12 +60,12 @@ namespace DAL
             base._cmd.Parameters.Add(new SqlParameter("@ID", id)).Direction = ParameterDirection.Input;
 
             base._rdr = base._cmd.ExecuteReader();
-            result.Load(_rdr);
+            result.Load(base._rdr);
 
             return result;
         }
 
-        internal string Maint(string id, string mods, string recType, string updatedBy, string updatedLoc, string updatedCC)
+        public string Maint(string id, string mods, string recType, string updatedBy, string updatedLoc, string updatedCC)
         {
             string result = string.Empty;
 
@@ -100,7 +85,7 @@ namespace DAL
             return result;
         }
 
-        internal DataTable GetPalletData()
+        public DataTable GetPalletData()
         {
             DataTable result = new DataTable();
 
@@ -109,7 +94,7 @@ namespace DAL
             base._cmd.CommandTimeout = 0;
 
             base._rdr = base._cmd.ExecuteReader();
-            result.Load(_rdr);
+            result.Load(base._rdr);
 
             return result;
         }

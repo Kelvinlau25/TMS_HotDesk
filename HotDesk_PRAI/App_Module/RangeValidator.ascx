@@ -1,36 +1,36 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="false" CodeFile="RangeValidator.ascx.cs"
     Inherits="App_Module_RangeValidator" %>
- <%  If cvRange.Type = ValidationDataType.Date Then
-         txtbox1.Attributes.Add("ReadOnly", "True")
-         txtbox2.Attributes.Add("ReadOnly", "True")
-         %>
+<% if (cvRange.Type == ValidationDataType.Date) {
+       txtbox1.Attributes.Add("ReadOnly", "True");
+       txtbox2.Attributes.Add("ReadOnly", "True");
+%>
 <script type="text/javascript" language="javascript">
-        var baseUrl = "<% Response.Write(ResolveUrl("~/")) %>";
-        $(function () {
-            $(".txtbox1").datepicker({
-                showOn: 'button',
-                buttonImageOnly: true,
-                buttonImage: baseUrl + 'image/icon_cal.png',
-                dateFormat: 'dd/mm/yy',
-                persist: false,
-                onSelect: function(){}
+        var baseUrl = "<%= ResolveUrl("~/") %>";
+    $(function () {
+        $(".txtbox1").datepicker({
+            showOn: 'button',
+            buttonImageOnly: true,
+            buttonImage: baseUrl + 'image/icon_cal.png',
+            dateFormat: 'dd/mm/yy',
+            persist: false,
+            onSelect: function () { }
 
-            });
         });
-         
-        $(function () {
-            $(".txtbox2").datepicker({
-                showOn: 'button',
-                buttonImageOnly: true,
-                buttonImage: baseUrl + 'image/icon_cal.png',
-                dateFormat: 'dd/mm/yy',
-                persist: false,
-                onSelect: function(){}
+    });
 
-            });
+    $(function () {
+        $(".txtbox2").datepicker({
+            showOn: 'button',
+            buttonImageOnly: true,
+            buttonImage: baseUrl + 'image/icon_cal.png',
+            dateFormat: 'dd/mm/yy',
+            persist: false,
+            onSelect: function () { }
+
         });
+    });
 </script>
-      <%  End If%> 
+<% } %>
 <div class="container" id="container" runat="server">
     <asp:Label ID="lblbox1" runat="server" Text="Input 1"></asp:Label>
     <asp:TextBox ID="txtbox1" runat="server" CssClass="txtbox1"></asp:TextBox>

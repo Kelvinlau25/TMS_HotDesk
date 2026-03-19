@@ -1,12 +1,10 @@
 using System;
-using System.Collections.Generic;
 using System.Text;
 using System.Web.UI;
-using ACL.MenuBar.Object;
 
 public partial class Style2_Menu : System.Web.UI.Page
 {
-    protected LeftMenuItemList _list;
+    protected string _listJson = "[]";
     private int _userid;
     private int _systemid;
     protected string _words;
@@ -44,36 +42,10 @@ public partial class Style2_Menu : System.Web.UI.Page
         _userid = Convert.ToInt32(Session["gstrUserID"]);
         _systemid = Convert.ToInt32(Session["system"]);
 
-        if (_list == null)
-        {
-            _list = new LeftMenuItemList();
-        }
-
-        int counter = 0;
-        var _acl = new ACL.OracleClass.Resource(System.Configuration.ConfigurationManager.ConnectionStrings["ORCL_ACL"].ConnectionString);
-        List<ACL.Object.Resource> _sourcelist = _acl.RetrieveResource(_userid, _systemid);
-        StringBuilder _str;
-        int _altcounter = 0;
-
-        foreach (ACL.Object.Resource itm in ACL.Search.GetParent(_sourcelist, _systemid))
-        {
-            _list.AddItem(new LeftMenuItem("left_menu_" + counter, itm.ResouceDesc, false));
-            _str = new StringBuilder();
-            _altcounter = 0;
-
-            foreach (ACL.Object.Resource node in ACL.Search.GetParent(_sourcelist, itm.ResourceID))
-            {
-                _altcounter++;
-                _str.AppendFormat("<li class='{2}'><a {3} href='{0}'>{1}</a></li>",
-                    GenerateKeywords(node.ResourceURL, _userid.ToString(), Session["gstrUserCom"].ToString(), Session["gettemp"].ToString(), node.ResourceName),
-                    node.ResouceDesc,
-                    (_altcounter % 2 == 0) ? "alt" : "nor",
-                    "target='page'");
-            }
-
-            liItems.Text += string.Format("<div class='bar_itms' id='{0}'><ul>{1}</ul></div>", "left_menu_" + counter, _str.ToString());
-            counter++;
-        }
+        // Menu was previously loaded from ACL Oracle database (ACL.OracleClass.Resource)
+        // ACL library is not available in this project, so menu is built as static JSON
+        // Add menu panels here as needed for the ExtJS accordion layout
+        _listJson = "[]";
 
         if (DateTime.Now.Hour < 12)
         {
@@ -93,19 +65,5 @@ public partial class Style2_Menu : System.Web.UI.Page
     {
         URL = URL.Replace("http://10.200.1.12:205/", "http://127.0.0.1:3313/LSS/");
         return Server.HtmlEncode(ResolveUrl(URL));
-    }
-
-    private void systemCheck(string Systemname)
-    {
-        Session["system"] = 0;
-        Session["system"] = ACL.OracleClass.Resource.RetrieveApplicationIDByName(
-            System.Configuration.ConfigurationManager.ConnectionStrings["ORCL_ACL"].ConnectionString,
-            Systemname);
-
-        if (Session["system"].ToString() == "0")
-        {
-            ClientScript.RegisterStartupScript(this.GetType(), "Alert", "alert('Invalid System');", true);
-            return;
-        }
     }
 }

@@ -216,44 +216,42 @@ public partial class App_Module_Controller_GSN : System.Web.UI.UserControl
 
         hpLink.NavigateUrl = setting.GetUrl(Control.Base.EnumAction.History, ListKey);
 
-        switch (setting.Action)
+        if (setting.Action == Control.Base.EnumAction.Add)
         {
-            case Control.Base.EnumAction.Add:
-                btnDelete.Visible = false;
-                hpLink.Visible = false;
-                pnconfirmation.Visible = false;
-                pninfo.Visible = false;
-                ModifyMode?.Invoke();
-                if (!Add)
-                    Response.Redirect(setting.GetUrl(Control.Base.EnumAction.None));
-                break;
-
-            case Control.Base.EnumAction.Delete:
-                hpLink.Visible = false;
-                btnReset.Visible = false;
-                btnDelete.Visible = false;
-                DisplayMode?.Invoke();
-                if (!Delete)
-                    Response.Redirect(setting.GetUrl(Control.Base.EnumAction.None));
-                break;
-
-            case Control.Base.EnumAction.Edit:
-                hpLink.Visible = false;
-                btnDelete.Visible = false;
-                pnconfirmation.Visible = false;
-                ModifyMode?.Invoke();
-                if (!Edit)
-                    Response.Redirect(setting.GetUrl(Control.Base.EnumAction.None));
-                break;
-
-            case Control.Base.EnumAction.View:
-                btnSubmit.Text = "Edit";
-                btnReset.Visible = false;
-                btnSubmit.CausesValidation = false;
-                btnDelete.Visible = Delete;
-                pnconfirmation.Visible = false;
-                DisplayMode?.Invoke();
-                break;
+            btnDelete.Visible = false;
+            hpLink.Visible = false;
+            pnconfirmation.Visible = false;
+            pninfo.Visible = false;
+            if (ModifyMode != null) ModifyMode();
+            if (!Add)
+                Response.Redirect(setting.GetUrl(Control.Base.EnumAction.None));
+        }
+        else if (setting.Action == Control.Base.EnumAction.Delete)
+        {
+            hpLink.Visible = false;
+            btnReset.Visible = false;
+            btnDelete.Visible = false;
+            if (DisplayMode != null) DisplayMode();
+            if (!Delete)
+                Response.Redirect(setting.GetUrl(Control.Base.EnumAction.None));
+        }
+        else if (setting.Action == Control.Base.EnumAction.Edit)
+        {
+            hpLink.Visible = false;
+            btnDelete.Visible = false;
+            pnconfirmation.Visible = false;
+            if (ModifyMode != null) ModifyMode();
+            if (!Edit)
+                Response.Redirect(setting.GetUrl(Control.Base.EnumAction.None));
+        }
+        else if (setting.Action == Control.Base.EnumAction.View)
+        {
+            btnSubmit.Text = "Edit";
+            btnReset.Visible = false;
+            btnSubmit.CausesValidation = false;
+            btnDelete.Visible = Delete;
+            pnconfirmation.Visible = false;
+            if (DisplayMode != null) DisplayMode();
         }
 
         if (!string.IsNullOrEmpty(ValidationGroup))
@@ -265,57 +263,18 @@ public partial class App_Module_Controller_GSN : System.Web.UI.UserControl
 
         if (pninfo.Visible)
         {
-            ACL.Object.User _createdtemp = null;
-            ACL.Object.User _updatedtemp = null;
-
             if (!IsPostBack)
             {
-                if (AuditTrailDisplayType == DisplayType.Full)
+                if (AuditTrailDisplayType == DisplayType.Full || AuditTrailDisplayType == DisplayType.Half || AuditTrailDisplayType == DisplayType.Name)
                 {
-                    if (CreatedCompanyCode == string.Empty)
-                        throw new Exception("Please set value into properties created company code");
-                    if (UpdatedCompanyCode == string.Empty)
-                        throw new Exception("Please set value into properties updated company code");
-                }
-
-                if (CreatedBy == string.Empty)
-                    throw new Exception("Please set value into properties created by");
-                if (UpdatedBy == string.Empty)
-                    throw new Exception("Please set value into properties updated by");
-
-                switch (AuditTrailDisplayType)
-                {
-                    case DisplayType.Full:
-                        _createdtemp = ACL.OracleClass.User.UserInfo(ConfigurationManager.ConnectionStrings[connectionstring].ConnectionString, CreatedCompanyCode, CreatedBy);
-                        _updatedtemp = ACL.OracleClass.User.UserInfo(ConfigurationManager.ConnectionStrings[connectionstring].ConnectionString, CreatedCompanyCode, UpdatedBy);
-                        break;
-                    case DisplayType.Half:
-                    case DisplayType.Name:
-                        _createdtemp = CreatedCompanyCode != string.Empty
-                            ? ACL.OracleClass.User.UserInfo(ConfigurationManager.ConnectionStrings[connectionstring].ConnectionString, CreatedCompanyCode, CreatedBy)
-                            : ACL.OracleClass.User.UserInfo(ConfigurationManager.ConnectionStrings[connectionstring].ConnectionString, CreatedBy);
-                        _updatedtemp = UpdatedCompanyCode != string.Empty
-                            ? ACL.OracleClass.User.UserInfo(ConfigurationManager.ConnectionStrings[connectionstring].ConnectionString, UpdatedCompanyCode, UpdatedBy)
-                            : ACL.OracleClass.User.UserInfo(ConfigurationManager.ConnectionStrings[connectionstring].ConnectionString, UpdatedBy);
-                        break;
+                    if (CreatedBy == string.Empty)
+                        throw new Exception("Please set value into properties created by");
+                    if (UpdatedBy == string.Empty)
+                        throw new Exception("Please set value into properties updated by");
                 }
 
                 string _createdtext = string.Empty;
                 string _updatedtext = string.Empty;
-
-                if (AuditTrailDisplayType == DisplayType.Full)
-                {
-                    if (_createdtemp != null && _createdtemp.UserCom != string.Empty)
-                    {
-                        trcreatecom.Visible = true;
-                        lblcreatedcom.Text = ACL.OracleClass.User.GetCompany(ConfigurationManager.ConnectionStrings[connectionstring].ConnectionString, _createdtemp.UserCom);
-                    }
-                    if (_updatedtemp != null && _updatedtemp.UserCom != string.Empty)
-                    {
-                        trupdatecom.Visible = true;
-                        lblupdatedcom.Text = ACL.OracleClass.User.GetCompany(ConfigurationManager.ConnectionStrings[connectionstring].ConnectionString, _updatedtemp.UserCom);
-                    }
-                }
 
                 if (AuditTrailDisplayType != DisplayType.Name)
                 {
@@ -323,16 +282,9 @@ public partial class App_Module_Controller_GSN : System.Web.UI.UserControl
                     _updatedtext = GenerateText(_updatedtext, " ID : " + UpdatedBy);
                 }
 
-                if (_createdtemp != null && _createdtemp.EmployeeName != string.Empty)
-                    _createdtext = GenerateText(_createdtext, " Name : " + _createdtemp.EmployeeName);
-
-                if (_updatedtemp != null && _updatedtemp.EmployeeName != string.Empty)
-                    _updatedtext = GenerateText(_updatedtext, " Name : " + _updatedtemp.EmployeeName);
-
                 lblcreatedby.Text = _createdtext;
                 lblcreateddate.Text = CreatedDate.ToString(DateTimeFormat);
                 lblcreatedloc.Text = CreatedLoc;
-
                 lblupdatedby.Text = _updatedtext;
                 lblupdateddate.Text = UpdatedDate.ToString(DateTimeFormat);
                 lblUpdatedloc.Text = UpdatedLoc;
@@ -418,35 +370,35 @@ public partial class App_Module_Controller_GSN : System.Web.UI.UserControl
     protected void btnSubmit_Click(object sender, EventArgs e)
     {
         Control.Base setting = (Control.Base)this.Page;
-        switch (setting.Action)
+        if (setting.Action == Control.Base.EnumAction.Delete)
         {
-            case Control.Base.EnumAction.Delete:
-                DeleteAction?.Invoke();
-                break;
-            case Control.Base.EnumAction.Add:
-                AddAction?.Invoke();
-                break;
-            case Control.Base.EnumAction.Edit:
-                EditAction?.Invoke();
-                break;
-            case Control.Base.EnumAction.View:
-                ViewEditAction?.Invoke();
-                Response.Redirect(setting.GetUrl(Control.Base.EnumAction.Edit));
-                break;
+            if (DeleteAction != null) DeleteAction();
+        }
+        else if (setting.Action == Control.Base.EnumAction.Add)
+        {
+            if (AddAction != null) AddAction();
+        }
+        else if (setting.Action == Control.Base.EnumAction.Edit)
+        {
+            if (EditAction != null) EditAction();
+        }
+        else if (setting.Action == Control.Base.EnumAction.View)
+        {
+            if (ViewEditAction != null) ViewEditAction();
+            Response.Redirect(setting.GetUrl(Control.Base.EnumAction.Edit));
         }
     }
 
     protected void btnReset_Click(object sender, EventArgs e)
     {
         Control.Base setting = (Control.Base)this.Page;
-        switch (setting.Action)
+        if (setting.Action == Control.Base.EnumAction.Add)
         {
-            case Control.Base.EnumAction.Add:
-                AddResetAction?.Invoke();
-                break;
-            case Control.Base.EnumAction.Edit:
-                EditResetAction?.Invoke();
-                break;
+            if (AddResetAction != null) AddResetAction();
+        }
+        else if (setting.Action == Control.Base.EnumAction.Edit)
+        {
+            if (EditResetAction != null) EditResetAction();
         }
     }
 
@@ -459,41 +411,41 @@ public partial class App_Module_Controller_GSN : System.Web.UI.UserControl
     {
         Control.Base setting = (Control.Base)this.Page;
         if (setting.Action == Control.Base.EnumAction.View)
-            PrintAction?.Invoke();
+            if (PrintAction != null) PrintAction();
     }
 
     protected void btnclose_Click(object sender, EventArgs e)
     {
         Control.Base setting = (Control.Base)this.Page;
         if (setting.Action == Control.Base.EnumAction.View)
-            CloseAction?.Invoke();
+            if (CloseAction != null) CloseAction();
     }
 
     protected void btnconfirm_Click(object sender, EventArgs e)
     {
         Control.Base setting = (Control.Base)this.Page;
         if (setting.Action == Control.Base.EnumAction.Edit)
-            ConfirmAction?.Invoke();
+            if (ConfirmAction != null) ConfirmAction();
     }
 
     protected void btnreject_Click(object sender, EventArgs e)
     {
         Control.Base setting = (Control.Base)this.Page;
         if (setting.Action == Control.Base.EnumAction.Edit)
-            RejectAction?.Invoke();
+            if (RejectAction != null) RejectAction();
     }
 
     protected void btnprintnote_Click(object sender, EventArgs e)
     {
         Control.Base setting = (Control.Base)this.Page;
         if (setting.Action == Control.Base.EnumAction.Edit)
-            PrintNoteAction?.Invoke();
+            if (PrintNoteAction != null) PrintNoteAction();
     }
 
     protected void btnEnterM2_Click(object sender, EventArgs e)
     {
         Control.Base setting = (Control.Base)this.Page;
         if (setting.Action == Control.Base.EnumAction.View)
-            EnterPalletM2Action?.Invoke();
+            if (EnterPalletM2Action != null) EnterPalletM2Action();
     }
 }

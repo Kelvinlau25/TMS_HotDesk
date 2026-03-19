@@ -4,9 +4,9 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title><%=ConfigurationManager.AppSettings("title")%></title>
+    <title><%= ConfigurationManager.AppSettings["title"] %></title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=8" / >
+    <meta http-equiv="X-UA-Compatible" content="IE=8" />
     <link href="../resources/css/ext-all.css" rel="stylesheet" type="text/css" />
     <link href="../css/Header.css" rel="stylesheet" type="text/css" />
     <link href="../css/Menu.css" rel="stylesheet" type="text/css" />
@@ -14,46 +14,42 @@
     <script src="../js/ext-base.js" type="text/javascript"></script>
     <script src="../js/ext-all.js" type="text/javascript"></script>
     <script type="text/javascript">    
-	    function change_vs(obj) {
-	        var vs_id = obj.checked;
+        function change_vs(obj) {
+            var vs_id = obj.checked;
 
-	        if (vs_id)
-	            Ext.get(obj.id + "-vs").setStyle('display', 'list-item');
-	        else
-	            Ext.get(obj.id + "-vs").setStyle('display', 'none');
-	    }
+            if (vs_id)
+                Ext.get(obj.id + "-vs").setStyle('display', 'list-item');
+            else
+                Ext.get(obj.id + "-vs").setStyle('display', 'none');
+        }
 
-	    Ext.onReady(function() {
+        Ext.onReady(function () {
 
-	        // NOTE: This is an example showing simple state management. During development,
-	        // it is generally best to disable state management as dynamically-generated ids
-	        // can change across page loads, leading to unpredictable results.  The developer
-	        // should ensure that stable state ids are set for stateful components in real apps.
-	        Ext.state.Manager.setProvider(new Ext.state.CookieProvider());
+            Ext.state.Manager.setProvider(new Ext.state.CookieProvider());
 
-	        var viewport = new Ext.Viewport({
-	            layout: 'border',
-	            items: [
-                new Ext.BoxComponent({ // raw
-                    region: 'north',
-                    el: 'north',
-                    height: 100
-                }),
-				{
-				    region: 'west',
-				    id: 'west-panel',
-				    title: 'Menu',
-				    split: true,
-				    width: 200,
-				    minSize: 175,
-				    maxSize: 300,
-				    collapsible: true,
-				    margins: '0 0 0 5',
-				    layout: 'accordion',
-				    layoutConfig: {
-				        animate: true
-				    },
-				    items: <%= _list.ToString() %>
+            var viewport = new Ext.Viewport({
+                layout: 'border',
+                items: [
+                    new Ext.BoxComponent({
+                        region: 'north',
+                        el: 'north',
+                        height: 100
+                    }),
+                    {
+                        region: 'west',
+                        id: 'west-panel',
+                        title: 'Menu',
+                        split: true,
+                        width: 200,
+                        minSize: 175,
+                        maxSize: 300,
+                        collapsible: true,
+                        margins: '0 0 0 5',
+                        layout: 'accordion',
+                        layoutConfig: {
+                            animate: true
+                        },
+                        items: <%= _list.ToString() %>
 				},
                 {
                     region: 'center',
@@ -64,47 +60,41 @@
                         columnWidth: 1,
                         title: 'Page',
                         contentEl: 'main-div'
-                        }]
-                    }
+                    }]
+                }
              ]
 	        });
 	    });
-	</script>
+    </script>
     <style type="text/css">
-        div#ext-gen9{overflow-y:auto;}
-        div.home a{color:#FFFFFF}
+        div#ext-gen9 { overflow-y: auto; }
+        div.home a { color: #FFFFFF; }
     </style>
-<script type="text/javascript">
-		function setIframeHeight(iframeName) {
-		  //var iframeWin = window.frames[iframeName];
-		  var iframeEl = document.getElementById? document.getElementById(iframeName): document.all? document.all[iframeName]: null;
-		  if (iframeEl) {
-		  iframeEl.style.height = "auto"; // helps resize (for some) if new doc shorter than previous
-		  //var docHt = getDocHeight(iframeWin.document);
-		  // need to add to height to be sure it will all show
-		  var h = alertSize();
-		  var new_h = (h-148);
-		  iframeEl.style.height = new_h + "px";
-		  //alertSize();
-		  }
-		}
 
-		function alertSize() {
-		  var myHeight = 0;
-		  if( typeof( window.innerWidth ) == 'number' ) {
-		    //Non-IE
-		    myHeight = window.innerHeight;
-		  } else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
-		    //IE 6+ in 'standards compliant mode'
-		    myHeight = document.documentElement.clientHeight;
-		  } else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
-		    //IE 4 compatible
-		    myHeight = document.body.clientHeight;
-		  }
-		  //window.alert( 'Height = ' + myHeight );
-		  return myHeight;
-		}
-	</script>
+    <script type="text/javascript">
+        function setIframeHeight(iframeName) {
+            var iframeEl = document.getElementById ? document.getElementById(iframeName) : document.all ? document.all[iframeName] : null;
+            if (iframeEl) {
+                iframeEl.style.height = "auto";
+                var h = alertSize();
+                var new_h = (h - 148);
+                iframeEl.style.height = new_h + "px";
+            }
+        }
+
+        function alertSize() {
+            var myHeight = 0;
+            if (typeof (window.innerWidth) == 'number') {
+                myHeight = window.innerHeight;
+            } else if (document.documentElement && (document.documentElement.clientWidth || document.documentElement.clientHeight)) {
+                myHeight = document.documentElement.clientHeight;
+            } else if (document.body && (document.body.clientWidth || document.body.clientHeight)) {
+                myHeight = document.body.clientHeight;
+            }
+            return myHeight;
+        }
+    </script>
+
 	<style type="text/css">
         .dropbtn {
             background-color: #4CAF50;
@@ -135,7 +125,7 @@
             display: block;
         }
 
-        .dropdown-content a:hover {background-color: #f1f1f1}
+        .dropdown-content a:hover { background-color: #f1f1f1; }
 
         .dropdown:hover .dropdown-content {
             display: block;
@@ -144,46 +134,46 @@
         .dropdown:hover .dropbtn {
             background-color: #3e8e41;
         }
-</style>
+    </style>
 </head>
-<body >
-  <asp:Literal ID="liItems" runat="server"></asp:Literal>
-  <div class="remark" id="main-div">
-    <%--<iframe scrolling="auto" name="page" frameborder="0" width="100%" id="frContent" src="../Acc/Display_IOT.aspx"></iframe>--%>
-    <%--<asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="../Acc/Display_IOT.aspx">HyperLink</asp:HyperLink>--%>
-    <div class="dropdown">
-        <button class="dropbtn">Warehouse 1</button>
-        <div class="dropdown-content">
-            <a href="#">Link 1</a>
-            <a href="#">Link 2</a>
-            <a href="#">Link 3</a>
-        </div>
-        <button class="dropbtn">Warehouse 2</button>
-        <div class="dropdown-content">
-            <a href="#">Link 1</a>
-            <a href="#">Link 2</a>
-            <a href="#">Link 3</a>
+<body>
+    <asp:Literal ID="liItems" runat="server"></asp:Literal>
+    <div class="remark" id="main-div">
+        <%--<iframe scrolling="auto" name="page" frameborder="0" width="100%" id="frContent" src="../Acc/Display_IOT.aspx"></iframe>--%>
+        <%--<asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="../Acc/Display_IOT.aspx">HyperLink</asp:HyperLink>--%>
+        <div class="dropdown">
+            <button class="dropbtn">Warehouse 1</button>
+            <div class="dropdown-content">
+                <a href="#">Link 1</a>
+                <a href="#">Link 2</a>
+                <a href="#">Link 3</a>
+            </div>
+            <button class="dropbtn">Warehouse 2</button>
+            <div class="dropdown-content">
+                <a href="#">Link 1</a>
+                <a href="#">Link 2</a>
+                <a href="#">Link 3</a>
+            </div>
         </div>
     </div>
-  </div>
-  <div id="north">
-    <div id="divinfo">
-        <div>
-            <span><%=Me._words%>, <%= Session("gettemp") %> </span>
+
+    <div id="north">
+        <div id="divinfo">
+            <div>
+                <span><%= this._words %>, <%= this.Session["gettemp"] %></span>
+            </div>
+            <br />
+            <div class="time">
+                <span>Date : <%= this.Session["LoginHis"] %></span>
+            </div>
+            <br />
+            <div class="home" id="trhome" runat="server">
+                <a target="_parent" href='<%= this.SignOutURL %>'>Log Out</a>
+                <a target="_parent" runat="server" id="ahrefhome">Home</a>
+            </div>
+            <div class="clear"></div>
         </div>
-        <br />
-        <div class="time">
-            <span>Date : <%=Session("LoginHis")%> </span>
-        </div>
-        <br />
-        <div class="home" id="trhome" runat="server">
-            <a target="_parent" href='<%= Me.SignOutURL() %>'>Log Out</a>
-            <a target="_parent" runat="server" id="ahrefhome">Home</a>
-        </div>
-        <div class="clear"></div>
+        <img class="imgheader" src="../image/header1.jpg" />
     </div>
-    <img class="imgheader" src="../image/header1.jpg" />
-  </div>
-  
 </body>
 </html>

@@ -88,21 +88,21 @@ public partial class App_Module_Controller : System.Web.UI.UserControl
                 hpLink.Visible = false;
                 pnconfirmation.Visible = false;
                 pninfo.Visible = false;
-                ModifyMode?.Invoke();
+                if (ModifyMode != null) ModifyMode();
                 if (Add == false) Response.Redirect(setting.GetUrl(Control.Base.EnumAction.None));
                 break;
             case Control.Base.EnumAction.Delete:
                 hpLink.Visible = false;
                 btnReset.Visible = false;
                 btnDelete.Visible = false;
-                DisplayMode?.Invoke();
+                if (DisplayMode != null) DisplayMode();
                 if (Delete == false) Response.Redirect(setting.GetUrl(Control.Base.EnumAction.None));
                 break;
             case Control.Base.EnumAction.Edit:
                 hpLink.Visible = false;
                 btnDelete.Visible = false;
                 pnconfirmation.Visible = false;
-                ModifyMode?.Invoke();
+                if (ModifyMode != null) ModifyMode();
                 if (Edit == false) Response.Redirect(setting.GetUrl(Control.Base.EnumAction.None));
                 break;
             case Control.Base.EnumAction.View:
@@ -111,7 +111,7 @@ public partial class App_Module_Controller : System.Web.UI.UserControl
                 btnSubmit.CausesValidation = false;
                 btnDelete.Visible = Delete;
                 pnconfirmation.Visible = false;
-                DisplayMode?.Invoke();
+                if (DisplayMode != null) DisplayMode();
                 break;
         }
 
@@ -175,7 +175,7 @@ public partial class App_Module_Controller : System.Web.UI.UserControl
 
     protected void btnDelete_Click(object sender, System.EventArgs e)
     {
-        DeleteAction?.Invoke();
+        if (DeleteAction != null) DeleteAction();
     }
 
     protected void btnSubmit_Click(object sender, System.EventArgs e)
@@ -184,16 +184,16 @@ public partial class App_Module_Controller : System.Web.UI.UserControl
         switch (setting.Action)
         {
             case Control.Base.EnumAction.Delete:
-                DeleteAction?.Invoke();
+                if (DeleteAction != null) DeleteAction();
                 break;
             case Control.Base.EnumAction.Add:
-                AddAction?.Invoke();
+                if (AddAction != null) AddAction();
                 break;
             case Control.Base.EnumAction.Edit:
-                EditAction?.Invoke();
+                if (EditAction != null) EditAction();
                 break;
             case Control.Base.EnumAction.View:
-                ViewEditAction?.Invoke();
+                if (ViewEditAction != null) ViewEditAction();
                 Response.Redirect(setting.GetUrl(Control.Base.EnumAction.Edit));
                 break;
         }
@@ -205,10 +205,10 @@ public partial class App_Module_Controller : System.Web.UI.UserControl
         switch (setting.Action)
         {
             case Control.Base.EnumAction.Add:
-                AddResetAction?.Invoke();
+                if (AddResetAction != null) AddResetAction();
                 break;
             case Control.Base.EnumAction.Edit:
-                EditResetAction?.Invoke();
+                if (EditResetAction != null) EditResetAction();
                 break;
         }
     }

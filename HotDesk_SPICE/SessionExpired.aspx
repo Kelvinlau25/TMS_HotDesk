@@ -12,7 +12,7 @@
         <span style="color:White;">Your session has expired due to inactivity.</span> 
         <br /> 
         <br /> 
-        <a target="_parent" href="<%= resolveurl(me.ReturnURL()) %>">Click here to login again</a> 
+       <a target="_parent" href="<%= ResolveUrl("~/Default.aspx") %>">Click here to login again</a>
     </p> 
 </body>
 </html>

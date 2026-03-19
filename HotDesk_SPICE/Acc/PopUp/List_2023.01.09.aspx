@@ -25,8 +25,8 @@ function closeWin() {
 
 <script type="text/javascript">
     function passvalue(staffID,staffName) {
-        window.opener.$('.<%= me._staffID %>').val(staffID);
-        window.opener.$('.<%= me._staffName %>').val(staffName);   
+        window.opener.$('.<%= _staffID %>').val(staffID);
+        window.opener.$('.<%= _staffName %>').val(staffName);
         // Close the popup
         window.close();
     }

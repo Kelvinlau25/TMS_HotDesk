@@ -84,12 +84,6 @@ public partial class App_Module_Controller_GSN : System.Web.UI.UserControl
         set { _datetimeformat = value; }
     }
 
-    /// <summary>
-    /// Full - Display Company Code + Employee Name + ID
-    /// Half - Display Employee Name + ID
-    /// Name - Display Employee Name
-    /// ID - Display ID
-    /// </summary>
     private DisplayType _AuditTrailDisplayType = DisplayType.ID;
     public DisplayType AuditTrailDisplayType
     {
@@ -223,7 +217,7 @@ public partial class App_Module_Controller_GSN : System.Web.UI.UserControl
                 hpLink.Visible = false;
                 pnconfirmation.Visible = false;
                 pninfo.Visible = false;
-                ModifyMode?.Invoke();
+                if (ModifyMode != null) ModifyMode();
                 if (!Add)
                     Response.Redirect(setting.GetUrl(Control.Base.EnumAction.None));
                 break;
@@ -232,7 +226,7 @@ public partial class App_Module_Controller_GSN : System.Web.UI.UserControl
                 hpLink.Visible = false;
                 btnReset.Visible = false;
                 btnDelete.Visible = false;
-                DisplayMode?.Invoke();
+                if (DisplayMode != null) DisplayMode();
                 if (!Delete)
                     Response.Redirect(setting.GetUrl(Control.Base.EnumAction.None));
                 break;
@@ -241,7 +235,7 @@ public partial class App_Module_Controller_GSN : System.Web.UI.UserControl
                 hpLink.Visible = false;
                 btnDelete.Visible = false;
                 pnconfirmation.Visible = false;
-                ModifyMode?.Invoke();
+                if (ModifyMode != null) ModifyMode();
                 if (!Edit)
                     Response.Redirect(setting.GetUrl(Control.Base.EnumAction.None));
                 break;
@@ -252,7 +246,7 @@ public partial class App_Module_Controller_GSN : System.Web.UI.UserControl
                 btnSubmit.CausesValidation = false;
                 btnDelete.Visible = Delete;
                 pnconfirmation.Visible = false;
-                DisplayMode?.Invoke();
+                if (DisplayMode != null) DisplayMode();
                 break;
         }
 
@@ -286,17 +280,46 @@ public partial class App_Module_Controller_GSN : System.Web.UI.UserControl
                 switch (AuditTrailDisplayType)
                 {
                     case DisplayType.Full:
-                        _createdtemp = ACL.OracleClass.User.UserInfo(ConfigurationManager.ConnectionStrings[connectionstring].ConnectionString, CreatedCompanyCode, CreatedBy);
-                        _updatedtemp = ACL.OracleClass.User.UserInfo(ConfigurationManager.ConnectionStrings[connectionstring].ConnectionString, CreatedCompanyCode, UpdatedBy);
+                        _createdtemp = ACL.OracleClass.User.UserInfo(
+                            ConfigurationManager.ConnectionStrings[connectionstring].ConnectionString,
+                            CreatedCompanyCode,
+                            CreatedBy);
+
+                        _updatedtemp = ACL.OracleClass.User.UserInfo(
+                            ConfigurationManager.ConnectionStrings[connectionstring].ConnectionString,
+                            CreatedCompanyCode,
+                            UpdatedBy);
                         break;
+
                     case DisplayType.Half:
                     case DisplayType.Name:
-                        _createdtemp = CreatedCompanyCode != string.Empty
-                            ? ACL.OracleClass.User.UserInfo(ConfigurationManager.ConnectionStrings[connectionstring].ConnectionString, CreatedCompanyCode, CreatedBy)
-                            : ACL.OracleClass.User.UserInfo(ConfigurationManager.ConnectionStrings[connectionstring].ConnectionString, CreatedBy);
-                        _updatedtemp = UpdatedCompanyCode != string.Empty
-                            ? ACL.OracleClass.User.UserInfo(ConfigurationManager.ConnectionStrings[connectionstring].ConnectionString, UpdatedCompanyCode, UpdatedBy)
-                            : ACL.OracleClass.User.UserInfo(ConfigurationManager.ConnectionStrings[connectionstring].ConnectionString, UpdatedBy);
+                        if (CreatedCompanyCode != string.Empty)
+                        {
+                            _createdtemp = ACL.OracleClass.User.UserInfo(
+                                ConfigurationManager.ConnectionStrings[connectionstring].ConnectionString,
+                                CreatedCompanyCode,
+                                CreatedBy);
+                        }
+                        else
+                        {
+                            _createdtemp = ACL.OracleClass.User.UserInfo(
+                                ConfigurationManager.ConnectionStrings[connectionstring].ConnectionString,
+                                CreatedBy);
+                        }
+
+                        if (UpdatedCompanyCode != string.Empty)
+                        {
+                            _updatedtemp = ACL.OracleClass.User.UserInfo(
+                                ConfigurationManager.ConnectionStrings[connectionstring].ConnectionString,
+                                UpdatedCompanyCode,
+                                UpdatedBy);
+                        }
+                        else
+                        {
+                            _updatedtemp = ACL.OracleClass.User.UserInfo(
+                                ConfigurationManager.ConnectionStrings[connectionstring].ConnectionString,
+                                UpdatedBy);
+                        }
                         break;
                 }
 
@@ -308,12 +331,17 @@ public partial class App_Module_Controller_GSN : System.Web.UI.UserControl
                     if (_createdtemp != null && _createdtemp.UserCom != string.Empty)
                     {
                         trcreatecom.Visible = true;
-                        lblcreatedcom.Text = ACL.OracleClass.User.GetCompany(ConfigurationManager.ConnectionStrings[connectionstring].ConnectionString, _createdtemp.UserCom);
+                        lblcreatedcom.Text = ACL.OracleClass.User.GetCompany(
+                            ConfigurationManager.ConnectionStrings[connectionstring].ConnectionString,
+                            _createdtemp.UserCom);
                     }
+
                     if (_updatedtemp != null && _updatedtemp.UserCom != string.Empty)
                     {
                         trupdatecom.Visible = true;
-                        lblupdatedcom.Text = ACL.OracleClass.User.GetCompany(ConfigurationManager.ConnectionStrings[connectionstring].ConnectionString, _updatedtemp.UserCom);
+                        lblupdatedcom.Text = ACL.OracleClass.User.GetCompany(
+                            ConfigurationManager.ConnectionStrings[connectionstring].ConnectionString,
+                            _updatedtemp.UserCom);
                     }
                 }
 
@@ -344,6 +372,7 @@ public partial class App_Module_Controller_GSN : System.Web.UI.UserControl
             btnSubmit.Visible = false;
             btnDelete.Visible = false;
         }
+
         if (IssuePrintMode)
         {
             btnPrint.Visible = true;
@@ -351,16 +380,19 @@ public partial class App_Module_Controller_GSN : System.Web.UI.UserControl
             btnDelete.Visible = false;
             btnReset.Visible = false;
         }
+
         if (MRecPrintMode)
         {
             btnPrint.Visible = true;
         }
+
         if (PrintMode)
         {
             btnPrint.Visible = true;
             btnclose.Visible = true;
             btnCancel.Visible = false;
         }
+
         if (ConfirmMode)
         {
             btnconfirm.Visible = true;
@@ -370,6 +402,7 @@ public partial class App_Module_Controller_GSN : System.Web.UI.UserControl
             btnDelete.Visible = false;
             btnReset.Visible = false;
         }
+
         if (EnterPalletM2Mode)
         {
             btnPrint.Visible = true;
@@ -377,12 +410,14 @@ public partial class App_Module_Controller_GSN : System.Web.UI.UserControl
             btnEnterM2.Visible = true;
             btnCancel.Visible = false;
         }
+
         if (CancelMode)
         {
             btnSubmit.Visible = false;
             btnDelete.Visible = false;
             btnReset.Visible = false;
         }
+
         if (ConfirmReturnMode)
         {
             btnconfirm.Visible = true;
@@ -421,16 +456,19 @@ public partial class App_Module_Controller_GSN : System.Web.UI.UserControl
         switch (setting.Action)
         {
             case Control.Base.EnumAction.Delete:
-                DeleteAction?.Invoke();
+                if (DeleteAction != null) DeleteAction();
                 break;
+
             case Control.Base.EnumAction.Add:
-                AddAction?.Invoke();
+                if (AddAction != null) AddAction();
                 break;
+
             case Control.Base.EnumAction.Edit:
-                EditAction?.Invoke();
+                if (EditAction != null) EditAction();
                 break;
+
             case Control.Base.EnumAction.View:
-                ViewEditAction?.Invoke();
+                if (ViewEditAction != null) ViewEditAction();
                 Response.Redirect(setting.GetUrl(Control.Base.EnumAction.Edit));
                 break;
         }
@@ -442,10 +480,11 @@ public partial class App_Module_Controller_GSN : System.Web.UI.UserControl
         switch (setting.Action)
         {
             case Control.Base.EnumAction.Add:
-                AddResetAction?.Invoke();
+                if (AddResetAction != null) AddResetAction();
                 break;
+
             case Control.Base.EnumAction.Edit:
-                EditResetAction?.Invoke();
+                if (EditResetAction != null) EditResetAction();
                 break;
         }
     }
@@ -459,41 +498,53 @@ public partial class App_Module_Controller_GSN : System.Web.UI.UserControl
     {
         Control.Base setting = (Control.Base)this.Page;
         if (setting.Action == Control.Base.EnumAction.View)
-            PrintAction?.Invoke();
+        {
+            if (PrintAction != null) PrintAction();
+        }
     }
 
     protected void btnclose_Click(object sender, EventArgs e)
     {
         Control.Base setting = (Control.Base)this.Page;
         if (setting.Action == Control.Base.EnumAction.View)
-            CloseAction?.Invoke();
+        {
+            if (CloseAction != null) CloseAction();
+        }
     }
 
     protected void btnconfirm_Click(object sender, EventArgs e)
     {
         Control.Base setting = (Control.Base)this.Page;
         if (setting.Action == Control.Base.EnumAction.Edit)
-            ConfirmAction?.Invoke();
+        {
+            if (ConfirmAction != null) ConfirmAction();
+        }
     }
 
     protected void btnreject_Click(object sender, EventArgs e)
     {
         Control.Base setting = (Control.Base)this.Page;
         if (setting.Action == Control.Base.EnumAction.Edit)
-            RejectAction?.Invoke();
+        {
+            if (RejectAction != null) RejectAction();
+        }
     }
 
     protected void btnprintnote_Click(object sender, EventArgs e)
     {
         Control.Base setting = (Control.Base)this.Page;
         if (setting.Action == Control.Base.EnumAction.Edit)
-            PrintNoteAction?.Invoke();
+        {
+            if (PrintNoteAction != null) PrintNoteAction();
+        }
     }
 
     protected void btnEnterM2_Click(object sender, EventArgs e)
     {
         Control.Base setting = (Control.Base)this.Page;
         if (setting.Action == Control.Base.EnumAction.View)
-            EnterPalletM2Action?.Invoke();
+        {
+            if (EnterPalletM2Action != null) EnterPalletM2Action();
+        }
     }
 }

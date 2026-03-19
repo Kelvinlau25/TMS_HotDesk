@@ -15,7 +15,7 @@ namespace DAL
         }
 
         // 20170809
-        internal DataTable GetIDList()
+        public DataTable GetIDList()
         {
             DataTable result = new DataTable();
 
@@ -30,7 +30,7 @@ namespace DAL
         }
         // end 20170809
 
-        internal ListCollection List(string table, string searchField, string searchValue, string sortField, int direction, int fromRowNo, int toRowNo, int deleted)
+        public ListCollection List(string table, string searchField, string searchValue, string sortField, int direction, int fromRowNo, int toRowNo, int deleted)
         {
             ListCollection result = new ListCollection();
 
@@ -63,7 +63,7 @@ namespace DAL
             return result;
         }
 
-        internal DataTable GetData(string id)
+        public DataTable GetData(string id)
         {
             DataTable result = new DataTable();
 
@@ -80,7 +80,7 @@ namespace DAL
             return result;
         }
 
-        internal string Maint(string id, string mods, string recType, string updatedBy, string updatedLoc, string updatedCC)
+        public string Maint(string id, string mods, string recType, string updatedBy, string updatedLoc, string updatedCC)
         {
             string result = string.Empty;
 
@@ -100,7 +100,7 @@ namespace DAL
             return result;
         }
 
-        internal DataTable GetPalletData()
+        public DataTable GetPalletData()
         {
             DataTable result = new DataTable();
 

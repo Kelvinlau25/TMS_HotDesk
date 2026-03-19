@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title><%=ConfigurationManager.AppSettings("title")%></title>
+    <title><%=ConfigurationManager.AppSettings["title"]%></title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=8" / >
     <link href="../resources/css/ext-all.css" rel="stylesheet" type="text/css" />
@@ -53,7 +53,7 @@
 				    layoutConfig: {
 				        animate: true
 				    },
-				    items: <%= _list.ToString() %>
+				    items: <%= _listJson %>
 				},
                 {
                     region: 'center',
@@ -169,15 +169,15 @@
   <div id="north">
     <div id="divinfo">
         <div>
-            <span><%=Me._words%>, <%= Session("gettemp") %> </span>
+            <span><%=this._words%>, <%= Session["gettemp"] %> </span>
         </div>
         <br />
         <div class="time">
-            <span>Date : <%=Session("LoginHis")%> </span>
+            <span>Date : <%=Session["LoginHis"]%> </span>
         </div>
         <br />
         <div class="home" id="trhome" runat="server">
-            <a target="_parent" href='<%= Me.SignOutURL() %>'>Log Out</a>
+            <a target="_parent" href='<%= this.SignOutURL %>'>Log Out</a>
             <a target="_parent" runat="server" id="ahrefhome">Home</a>
         </div>
         <div class="clear"></div>

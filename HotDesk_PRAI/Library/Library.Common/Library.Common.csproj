@@ -11,6 +11,8 @@
     <AssemblyName>Library.common</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>

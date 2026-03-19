@@ -1,7 +1,6 @@
 using System.Web;
 using System.Configuration;
 using System.Collections.Generic;
-using Library.Database.IntranetPortal.BLL;
 
 namespace BLL
 {
@@ -255,7 +254,7 @@ namespace BLL
                             if (fi[i].Type.Equals("PDF"))
                             {
                                 string FilePlayerUrl = ConfigurationManager.AppSettings.Get("PDF_FILE_VIEWER");
-                                string EncodedVideoFile = HttpUtility.UrlEncode(FileUploadHelper.ConvertDataBase2UrlFormat(fi[i].Url.ToString()));
+                                string EncodedVideoFile = HttpUtility.UrlEncode(HttpUtility.UrlDecode(fi[i].Url.ToString()).Replace(ConfigurationManager.AppSettings.Get("FILESERVER_KEY").ToString(), ConfigurationManager.AppSettings.Get("FILESERVER_URL").ToString()));
 
                                 string url = string.Format(FilePlayerUrl, EncodedVideoFile);
                                 url = isShowBack ? url + "&p=1" : url;

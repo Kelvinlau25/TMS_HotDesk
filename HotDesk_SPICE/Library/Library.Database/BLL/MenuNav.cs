@@ -1,4 +1,5 @@
 using System.Data;
+using Library.Database;
 
 namespace BLL
 {
@@ -8,7 +9,6 @@ namespace BLL
         {
             using (var _dal = new DAL.MenuNav())
             {
-                // Validation the parameter value
                 if (direction != 1)
                 {
                     direction = 0;
@@ -44,19 +44,19 @@ namespace BLL
 
         public static string Maint(string id, string mods, string recType)
         {
-            using (var _Dal = new DAL.MenuNav())
+            using (var _dal = new DAL.MenuNav())
             {
                 string str = System.Web.HttpContext.Current.Session["gstrUserID"].ToString();
                 string cc = System.Web.HttpContext.Current.Session["gstrUserCompCode"].ToString();
-                string result = _Dal.Maint(id, mods, recType, str, System.Web.HttpContext.Current.Request.UserHostAddress.ToString(), cc);
+                string result = _dal.Maint(id, mods, recType, str, System.Web.HttpContext.Current.Request.UserHostAddress.ToString(), cc);
 
                 if (result == "1")
                 {
-                    _Dal.Commit();
+                    _dal.Commit();
                 }
                 else
                 {
-                    _Dal.Rollback();
+                    _dal.Rollback();
                 }
 
                 return result;
