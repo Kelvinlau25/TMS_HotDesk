@@ -1,0 +1,574 @@
+body {
+    display: block;
+    margin: 0px;
+}
+
+.wrap
+{
+	margin: 0 auto;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: auto;
+    display: table;
+}
+.mtest
+{   
+	width:100%;
+	    display: table;
+	}
+/*mtest end*/
+.dropdown 
+{
+	margin: 0 auto;
+    display: table;
+}
+.btnlist {
+    position: relative;
+   display: inline-block;
+    padding:10px;
+
+}
+.dropbtn {
+    background-color: #000000;
+    color: white;
+    padding: 16px;
+    font-size: 20px;
+    border: none;
+    cursor: pointer;
+}
+
+dropdown-content {
+    display: none;
+  
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.5);
+}
+
+#dropdowncontent1,#dropdowncontent2,#dropdowncontent3,#dropdowncontent6,#dropdowncontent5,#dropdowncontent7
+{
+    box-shadow: 0px 12px 20px 0px rgba(0,0,0,0.2);
+ }
+
+
+.header
+{
+	width:100%;
+	height:45px;
+	color:White;
+	font-weight:bold;
+	
+    background: rgb(100,100,255); /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient( #2969b0, rgb(37, 151, 154)); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient( #2969b0, rgb(37, 151, 154)); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient( #2969b0, rgb(37, 151, 154)); /* For Firefox 3.6 to 15 */
+    background: linear-gradient( #2969b0, rgb(37, 151, 154)); /* Standard syntax 
+background: linear-gradient( #2969b0, rgb(37, 151, 154));
+( #2969b0, rgb(180,180,255))
+*/
+}
+
+
+.header h2
+{
+	padding-top:10px;
+	padding-bottom:10px;
+	padding-left:10px;
+	font-size:24px;
+	-webkit-margin-before: 0em;
+    -webkit-margin-after: 0em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    font-weight: bold;
+    text-align :center ;
+
+}
+
+
+.desc {
+    padding: 15px;
+    text-align: center;
+
+	background-color:Black;
+	color:White;
+	font-size:15px;
+}
+
+.desc a{
+	background-color:Black;
+	color:White;
+	font-size:15px;
+}
+
+.map
+{
+    width: 725px !important;
+    height: auto;
+    position: relative !important;
+
+    border:2px solid grey;
+}
+
+.tabs,.youtube
+{
+    display:inline;
+}
+.none
+{
+	display:none;
+	}
+	
+img.map:hover {
+    background: transparent;
+}
+
+ .divhide
+ {
+ 	position:absolute;
+ 	width:100%;	  
+ 	height:100%;
+    z-index:1;
+ 	background-color:white;
+ }
+.colorwrap {
+    vertical-align: top;
+}
+#colorbar {
+    margin: 0 auto;
+    display: table;
+}
+#colorbar .blo {
+    display: flex;
+    font-size:16px;
+    padding: 10px 0;
+    margin-right: 10px;
+}
+
+.colorbox 
+{
+	width: 20px;
+	height: 20px;   
+	border: 1px solid grey;
+	    margin: 0 10px;
+	}
+.get1 {
+	background: #fffa00;
+}
+.get0 {
+	background: #0ef748;
+}
+.get2 {
+	background: #ff00ff;
+}
+.get3 {
+	background: #ff0000;
+}
+
+#dropdowncontent1, #dropdowncontent2, #dropdowncontent3, #dropdowncontent4,.colorwrap {
+    display: inline-block;margin:20px 0 5px 0;
+}
+
+.footer {
+    width: 100%;
+    height: 24px;
+    /* background-color: rgb(150,150,150); */
+    color: White;
+    font-weight: bold;
+    background: #2969b0;
+    background: -webkit-linear-gradient(#2969b0, rgb(15, 78, 90)); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient( #2969b0, rgb(15, 78, 90)); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient( #2969b0, rgb(15, 78, 90)); /* For Firefox 3.6 to 15 */
+    background: linear-gradient( #2969b0, rgb(15, 78, 90)); /* Standard syntax #2969b0, rgb(37, 151, 154)*/
+}
+.footer MARQUEE
+{
+	padding-top:0px;
+	font-size:16px;
+    font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+    text-shadow: 2px 2px 12px #000;
+    color: White;
+    font-weight:lighter;
+}
+
+.right
+{
+	float:right;
+	}
+	
+.map1
+{
+	width: 725px !important;
+    height: auto;
+    position: relative !important;
+    border: 2px solid grey;
+    height:725px;Width:850px;
+	}
+
+
+.OutTable th
+{
+    padding:5px;
+    font-size:25px;
+}
+
+.OutTable td,th
+{
+    border-width:2px;
+    border-style: solid;
+    border-color: black white;
+}
+
+.OutTable td
+{
+    padding:5px;
+    font-size:22px;
+}
+.OutTable tr {
+    background-color: lightblue;
+}
+.OutTable tr:nth-child(even) {
+    background-color: white;
+}
+
+.OutTable th
+{
+    font-size:23px;
+    background-color:black;
+    color:white;
+    padding:10px;
+}
+
+.OutTableFooter
+{
+    background-color:black;
+    color:white;
+}
+
+.OutTable tr:last-child
+{
+	    background-color:black;
+
+}
+
+.OutTable table tr:last-child
+{
+	background-color:White;
+	color:Black;
+	font-weight:bold;
+	
+}
+
+.framebody
+{
+	    width: 100%;
+    height: 100%;
+	}
+.label1,.label2,.label3,.label4,.label5,.label6,.label7,.label8,.label9,.label10,
+.label11,.label12,.label13,.label14,.label15,.label16,.label17,.label18,.label19,.label20,
+.label21,.label22,.label23,.label24
+{
+	    width: 90px;
+    height: 90px;
+     z-index: 1000;
+    position: absolute;
+        background: transparent;
+    border: 0;
+    font-size:0.7em;
+    white-space: normal;
+	}
+.label25,.label26,.label27,.label28,.label29,.label30
+{
+	    width: 90px;
+    height: 85px;
+     z-index: 1000;
+    position: absolute;
+        background: transparent;
+    border: 0;
+    font-size:0.7em;
+    white-space: normal;
+	}
+.label31,.label32,.label33,.label34,.label35,.label36,.label37,.label38,.label39,.label40,
+.label41,.label42,.label43,.label44,.label45,.label46,.label47,.label48,.label49,.label50
+
+{
+	width: 55px;
+    height: 85px;
+     z-index: 1000;
+    position: absolute;
+        background: grey;
+    border: 0;
+    font-size:0.6em;
+    white-space: normal;
+    padding: 0;
+	}
+.label1,.label2,.label5,.label6,.label9,.label10,
+.label13,.label14,.label17,.label18,
+.label21,.label22,.label26,.label28,.label30{
+	padding-top:40px;
+	}
+	
+.label3,.label4,.label7,.label8,.label11,.label12,.label15,.label16,
+.label19,.label20,.label23,.label24,.label25,.label27,.label29
+{padding-bottom:30px;
+	}
+
+
+.label1
+{
+	top: 210px;
+    left: 225px;
+	}
+	
+.label2
+{
+	top: 210px;
+    left: 320px;
+	}	
+.label3
+{
+	top: 305px;
+    left: 225px;
+	}
+.label4
+{
+	top: 305px;
+    left: 320px;
+	}
+.label5
+{
+	top: 450px;
+    left: 225px;
+	}
+	
+.label6
+{
+	top: 450px;
+    left: 320px;
+	}	
+		
+.label7
+{
+	top: 545px;
+    left: 225px;
+	}
+	
+.label8
+{
+	top: 545px;
+    left: 320px;
+	}	
+.label9
+{
+	top: 640px;
+    left: 225px;
+	}
+	
+.label10
+{
+	top: 640px;
+    left: 320px;
+	}			
+.label11
+{
+	top: 730px;
+    left: 225px;
+	}
+	
+.label12
+{
+	top: 730px;
+    left: 320px;
+	}	
+	
+	/*13-24*/	
+	.label13
+{
+	top: 210px;
+    left: 485px;
+	}
+	
+.label14
+{
+	top: 210px;
+    left: 580px;
+	}	
+.label15
+{
+	top: 305px;
+    left: 485px;
+	}
+.label16
+{
+	top: 305px;
+    left: 580px;
+	}
+.label17
+{
+	top: 450px;
+    left: 485px;
+	}
+	
+.label18
+{
+	top: 450px;
+    left: 580px;
+	}	
+		
+.label19
+{
+	top: 545px;
+    left: 485px;
+	}
+	
+.label20
+{
+	top: 545px;
+    left: 580px;
+	}	
+.label21
+{
+	top: 640px;
+    left: 485px;
+	}
+	
+.label22
+{
+	top: 640px;
+    left: 580px;
+	}			
+.label23
+{
+	top: 730px;
+    left: 485px;
+	}
+	
+.label24
+{
+	top: 730px;
+    left: 580px;
+	}
+	
+/*25-30*/
+.label25
+{
+	top: 245px;
+    left: 740px;
+	}
+.label26
+{
+	top: 340px;
+    left: 740px;
+	}
+.label27
+{
+	top: 430px;
+    left: 740px;
+	}
+.label28
+{
+	top: 525px;
+    left: 740px;
+	}
+.label29
+{
+	top: 615px;
+    left: 740px;
+	}
+.label30
+{
+	top: 710px;
+    left: 740px;
+	}
+		/*31-38*/
+.label31 {
+top: 365px;
+left: 335px;
+}
+.label32 {
+top: 365px;
+left: 375px;
+}
+.label33 {
+top: 425px;
+left: 335px;
+}
+.label34
+{
+   top: 425px;
+    left: 375px;
+}
+
+.label35{
+top: 540px;
+left: 335px;
+}
+.label37 {
+top: 540px;
+left: 375px;
+}
+.label36{
+top: 600px;
+left: 335px;
+}
+.label38 {
+top: 600px;
+left: 375px;
+}
+
+/*39-50*/
+.label39 {
+top: 360px;
+left: 515px;
+}
+.label41 {
+top: 360px;
+left: 555px;
+}
+
+.label40 {
+top: 420px;
+left: 510px;
+}
+.label42 {
+top: 420px;
+left: 555px;
+}
+
+.label43 {
+top: 535px;
+left: 510px;
+}
+
+.label45 {
+top: 535px;
+left: 555px;
+}
+
+.label44 {
+top: 595px;
+left: 510px;
+}
+.label46{
+top: 595px;
+left: 555px;
+}
+
+.label47 {
+top: 675px;
+left: 510px;
+}
+
+.label48 {
+top: 675px;
+left: 555px;
+}
+
+.label49 {
+top: 735px;
+left: 510px;
+}
+.label50{
+top: 735px;
+left: 555px;
+}

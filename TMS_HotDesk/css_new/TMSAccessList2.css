@@ -1,0 +1,123 @@
+body {
+    display: block;
+    margin: 0px;
+    width:100%;
+    height:1024px;
+    
+}
+
+.framebody
+{
+	    width: 100%;
+    height: 100%;
+	}
+.label1,.label2,.label3,.label4,.label5,.label6,.label7,.label8,.label9,.label10,
+.label11,.label12,.label13,.label14,.label15,.label16,.label17,.label18,.label19,.label20,
+.label21,.label22,.label23,.label24
+{
+	    width: 90px;
+    height: 90px;
+     z-index: 1000;
+    position: absolute;
+        background: transparent;
+    border: 0;
+    font-size:0.7em;
+    white-space: normal;
+    
+	}
+	
+
+.dropbtn1 {
+    background-color: #000000;
+    color: white;
+    padding: 13px;
+    font-size: 18px;
+    border: none;
+    cursor: pointer;
+}
+
+
+
+.OutTable th
+{
+    font-size:23px;
+    background-color:black;
+    color:white;
+    padding:10px;
+}
+
+.OutTable td,th
+{
+    border-width:2px;
+    border-style: solid;
+    border-color: black white;
+}
+
+.OutTable td
+{
+    padding:5px;
+    font-size:922px;
+}
+.OutTable tr {
+    background-color: lightblue;
+}
+
+
+.OutTable1 th
+{
+    font-size:23px;
+    background-color:black;
+    color:white;
+    padding:10px;
+}
+
+.OutTable1 td,th
+{
+    border-width:2px;
+    border-style: solid;
+    border-color: black white;
+    background-color: lightblue;
+}
+
+.OutTable1 td
+{	
+    background-color: lightblue;
+    padding:5px;
+    font-size:22px;
+}
+.OutTable1 tr {
+    background-color: lightblue;
+}
+
+
+
+.OutTableFooter
+{
+    font-size:33px;	
+    font-weight:bold;
+    background-color:black;
+    color:white;
+    padding:15px;
+
+}
+
+.listWRAP 
+{
+	margin-left:auto;
+	margin-right:auto;
+	width:100%;
+	
+	
+	
+}
+
+.dropbtn2
+{
+	font-size:30px;
+	font-weight:bold;
+	padding:15px 40px 15px 40px;
+	position:absolute;
+	right:30px;
+	
+}
+

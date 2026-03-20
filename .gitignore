@@ -7,3 +7,6 @@ obj/
 *.pdb
 *.dll
 packages/.nuget/
+
+Thumbs.db
+*.scc
