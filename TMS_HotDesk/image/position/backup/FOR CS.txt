@@ -1,0 +1,19 @@
+ext hidden
+lighter red
+separate ai home , ioffice 
+hidden bar
+
+
+<img src="url/to/your/image.jpg" alt="" usemap="#Map" />
+<map name="Map" id="Map">
+    <area alt="" title="" href="#" shape="poly" coords="131,72,143,33,174,40,172,60,177,73,191,87,170,110" />
+   <area alt="" title="" href="#" shape="poly" coords="191,88,201,96,209,102,222,104,239,101,248,133,210,146,207,144,171,111" />
+<area alt="" title="" href="#" shape="poly" coords="249,138,257,162,250,165,245,167,237,175,230,184,226,201,203,199,211,151" />
+<area alt="" title="" href="#" shape="poly" coords="226,201,225,213,228,224,233,233,240,241,247,246,232,271,200,250,204,198" />
+<area alt="" title="" href="#" shape="poly" coords="230,277,217,300,206,295,196,294,187,294,167,304,151,278,196,254" />
+ <area alt="" title="" href="#" shape="poly" coords="167,303,157,309,149,317,143,325,139,336,140,346,104,346,102,305,151,278" />
+<area alt="" title="" href="#" shape="poly" coords="74,246,89,251,98,253,108,253,116,251,131,242,149,273,101,299,62,277" />
+<area alt="" title="" href="#" shape="poly" coords="131,242,144,236,152,227,157,218,161,207,162,194,196,197,193,248,149,271" />
+<area alt="" title="" href="#" shape="poly" coords="163,195,164,180,162,167,157,155,149,146,142,140,166,115,206,149,197,196" />
+<area alt="" title="" href="#" shape="poly" coords="142,140,130,129,123,125,113,122,98,122,87,125,81,91,129,78,166,115" />
+</map>
