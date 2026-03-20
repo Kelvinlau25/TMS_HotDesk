@@ -1,0 +1,114 @@
+using Oracle.ManagedDataAccess.Client;
+
+namespace Library.Oraclecls
+{
+    public abstract class Connection : System.IDisposable
+    {
+        protected OracleConnection _con;
+        protected OracleCommand _cmd;
+        protected OracleDataReader _rdr;
+        protected OracleTransaction _tran;
+
+        private string _constr = string.Empty;
+        public string ConnectionString
+        {
+            get { return _constr; }
+            set { _constr = value; }
+        }
+
+        public Connection(string connectionStringName)
+        {
+            this.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings[connectionStringName].ToString();
+
+            if (ConnectionString == string.Empty)
+            {
+                throw new System.Exception("Invalid Connection String Name That Set At Web Config");
+            }
+
+            this._con = new OracleConnection(this.ConnectionString);
+            this._con.Open();
+            this._cmd = _con.CreateCommand();
+            this._tran = _con.BeginTransaction();
+        }
+
+        public string Status
+        {
+            get
+            {
+                if (_con != null)
+                {
+                    return _con.State.ToString();
+                }
+                else
+                {
+                    return string.Empty;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Commit all the transaction
+        /// </summary>
+        public void Commit()
+        {
+            _tran.Commit();
+        }
+
+        /// <summary>
+        /// Rollback all the transaction
+        /// </summary>
+        public void RollBack()
+        {
+            _tran.Rollback();
+        }
+
+        private bool disposedValue = false;
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this.disposedValue)
+            {
+                if (disposing)
+                {
+                    // TODO: free other state (managed objects).
+                }
+
+                // TODO: free your own state (unmanaged objects).
+                // TODO: set large fields to null.
+
+                if (_rdr != null)
+                {
+                    _rdr.Dispose();
+                }
+
+                if (_tran != null)
+                {
+                    _tran.Dispose();
+                }
+
+                if (_cmd != null)
+                {
+                    _cmd.Dispose();
+                }
+
+                if (_con != null)
+                {
+                    if (_con.State == System.Data.ConnectionState.Open)
+                    {
+                        _con.Close();
+                    }
+                    _con.Dispose();
+                }
+            }
+            this.disposedValue = true;
+        }
+
+        #region IDisposable Support
+        public void Dispose()
+        {
+            Dispose(true);
+            System.GC.SuppressFinalize(this);
+        }
+        #endregion
+    }
+}
