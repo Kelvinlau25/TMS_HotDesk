@@ -30,6 +30,9 @@
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Microsoft.Bcl.AsyncInterfaces.6.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
+    <Reference Include="Oracle.ManagedDataAccess, Version=4.122.21.1, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Oracle.ManagedDataAccess.21.9.0\lib\net462\Oracle.ManagedDataAccess.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
@@ -74,10 +77,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BLL\FileViewerHelper.cs" />
-    <Compile Include="BLL\HotSeat.cs" />
-    <Compile Include="BLL\MenuNav.cs" />
-    <Compile Include="DAL\HotSeat.cs" />
-    <Compile Include="DAL\MenuNav.cs" />
+    <Compile Include="BLL\HotSeatSpice.cs" />
+    <Compile Include="BLL\HotSeatPrai.cs" />
+    <Compile Include="BLL\MenuNavSpice.cs" />
+    <Compile Include="BLL\MenuNavPrai.cs" />
+    <Compile Include="DAL\HotSeatSpice.cs" />
+    <Compile Include="DAL\HotSeatPrai.cs" />
+    <Compile Include="DAL\MenuNavSpice.cs" />
+    <Compile Include="DAL\MenuNavPrai.cs" />
     <Compile Include="Others\Encryption.cs" />
     <Compile Include="Others\ListCollection.cs" />
   </ItemGroup>

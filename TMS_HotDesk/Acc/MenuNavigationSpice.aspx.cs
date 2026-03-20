@@ -33,7 +33,7 @@ public partial class Acc_MenuNavigationSpice : System.Web.UI.Page
             pnlhd2.Controls.Add(label);
         }
 
-        DataTable lst = BLL.MenuNav.GetIDList();
+        DataTable lst = BLL.MenuNavSpice.GetIDList();
 
         for (i1 = 1; i1 <= lst.Rows.Count; i1++)
         {

@@ -49,7 +49,6 @@
                         layoutConfig: {
                             animate: true
                         },
-                        items: <%= _list.ToString() %>
 				},
                 {
                     region: 'center',

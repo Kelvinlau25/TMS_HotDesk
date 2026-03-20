@@ -1,4 +1,5 @@
 using System;
+using Library.Database;
 
 public partial class Acc_PopUp_ListPrai : Control.Base
 {
@@ -6,7 +7,7 @@ public partial class Acc_PopUp_ListPrai : Control.Base
     protected string _staffID = string.Empty;
     protected string _staffName = string.Empty;
 
-    public Acc_PopUp_List()
+    public Acc_PopUp_ListPrai()
     {
         base.SetupKey = "HOTSEAT";
         base.DefaultSort = "STAFF_ID";
@@ -25,7 +26,7 @@ public partial class Acc_PopUp_ListPrai : Control.Base
 
     public override void BindData()
     {
-        _list = BLL.HotSeat.List(base.PageNo);
+        _list = BLL.HotSeatPrai.List(base.PageNo);
         grdResult.DataSource = _list.Data;
         grdResult.DataBind();
 

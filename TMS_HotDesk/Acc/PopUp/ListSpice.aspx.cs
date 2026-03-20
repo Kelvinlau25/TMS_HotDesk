@@ -7,7 +7,7 @@ public partial class Acc_PopUp_ListSpice : Control.Base
     protected string _staffID = string.Empty;
     protected string _staffName = string.Empty;
 
-    public Acc_PopUp_List()
+    public Acc_PopUp_ListSpice()
     {
         base.SetupKey = "HOTSEAT";
         base.DefaultSort = "STAFF_ID";
@@ -26,7 +26,7 @@ public partial class Acc_PopUp_ListSpice : Control.Base
 
     public override void BindData()
     {
-        _list = global::BLL.HotSeat.List(base.PageNo);
+        _list = global::BLL.HotSeatSpice.List(base.PageNo);
         grdResult.DataSource = _list.Data;
         grdResult.DataBind();
 

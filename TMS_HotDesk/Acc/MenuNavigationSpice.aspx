@@ -376,7 +376,7 @@
                 
                 <div id="dropdowncontent1" class="dropdown-content dc" style="border-color:red;border:solid 5px solid red">
                     <asp:Panel runat="server" ID="pnlhd1" CssClass="pnlhd" BorderColor="Black"></asp:Panel>
-                    <asp:Image ID="Image1" runat="server" Height="" Width="" ImageUrl="../Acc/left.png" usemap="#simple" CssClass="map" />
+                    <asp:Image ID="Image1" runat="server" ImageUrl="~/Acc/left.png" UseMap="#simple" CssClass="map" />
                   
                     <map  id="tabs" class="tabs" name="simple">
 					<%--<area title=""  shape="poly" id="map1"  coords="170,207,211,207,211,289,128,289,128,250,160,250,170,235,170,207"  />--%>
@@ -434,7 +434,7 @@ Chong, Charlene/TMS(MY)/Charlene Chong Seok Yun(Application Solution Sect Mgr) w
               
                 <div id="dropdowncontent2" class="dropdown-content2 dc">
                     <asp:Panel runat="server" ID="pnlhd2" CssClass="pnlhd pnlhd2"></asp:Panel>
-                    <asp:Image ID="Image2" runat="server" ImageUrl="../Acc/right.png" usemap="#Image2" CssClass="map" />
+                    <asp:Image ID="Image2" runat="server" ImageUrl="~/Acc/right.png" UseMap="#Image2" CssClass="map" />
                   
                     <map id="Map1" class="tabs" name="Image2">
                         <%--<!-- left -->

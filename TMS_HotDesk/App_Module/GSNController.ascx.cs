@@ -259,91 +259,18 @@ public partial class App_Module_Controller_GSN : System.Web.UI.UserControl
 
         if (pninfo.Visible)
         {
-            ACL.Object.User _createdtemp = null;
-            ACL.Object.User _updatedtemp = null;
-
             if (!IsPostBack)
             {
-                if (AuditTrailDisplayType == DisplayType.Full)
+                if (AuditTrailDisplayType == DisplayType.Full || AuditTrailDisplayType == DisplayType.Half || AuditTrailDisplayType == DisplayType.Name)
                 {
-                    if (CreatedCompanyCode == string.Empty)
-                        throw new Exception("Please set value into properties created company code");
-                    if (UpdatedCompanyCode == string.Empty)
-                        throw new Exception("Please set value into properties updated company code");
-                }
-
-                if (CreatedBy == string.Empty)
-                    throw new Exception("Please set value into properties created by");
-                if (UpdatedBy == string.Empty)
-                    throw new Exception("Please set value into properties updated by");
-
-                switch (AuditTrailDisplayType)
-                {
-                    case DisplayType.Full:
-                        _createdtemp = ACL.OracleClass.User.UserInfo(
-                            ConfigurationManager.ConnectionStrings[connectionstring].ConnectionString,
-                            CreatedCompanyCode,
-                            CreatedBy);
-
-                        _updatedtemp = ACL.OracleClass.User.UserInfo(
-                            ConfigurationManager.ConnectionStrings[connectionstring].ConnectionString,
-                            CreatedCompanyCode,
-                            UpdatedBy);
-                        break;
-
-                    case DisplayType.Half:
-                    case DisplayType.Name:
-                        if (CreatedCompanyCode != string.Empty)
-                        {
-                            _createdtemp = ACL.OracleClass.User.UserInfo(
-                                ConfigurationManager.ConnectionStrings[connectionstring].ConnectionString,
-                                CreatedCompanyCode,
-                                CreatedBy);
-                        }
-                        else
-                        {
-                            _createdtemp = ACL.OracleClass.User.UserInfo(
-                                ConfigurationManager.ConnectionStrings[connectionstring].ConnectionString,
-                                CreatedBy);
-                        }
-
-                        if (UpdatedCompanyCode != string.Empty)
-                        {
-                            _updatedtemp = ACL.OracleClass.User.UserInfo(
-                                ConfigurationManager.ConnectionStrings[connectionstring].ConnectionString,
-                                UpdatedCompanyCode,
-                                UpdatedBy);
-                        }
-                        else
-                        {
-                            _updatedtemp = ACL.OracleClass.User.UserInfo(
-                                ConfigurationManager.ConnectionStrings[connectionstring].ConnectionString,
-                                UpdatedBy);
-                        }
-                        break;
+                    if (CreatedBy == string.Empty)
+                        throw new Exception("Please set value into properties created by");
+                    if (UpdatedBy == string.Empty)
+                        throw new Exception("Please set value into properties updated by");
                 }
 
                 string _createdtext = string.Empty;
                 string _updatedtext = string.Empty;
-
-                if (AuditTrailDisplayType == DisplayType.Full)
-                {
-                    if (_createdtemp != null && _createdtemp.UserCom != string.Empty)
-                    {
-                        trcreatecom.Visible = true;
-                        lblcreatedcom.Text = ACL.OracleClass.User.GetCompany(
-                            ConfigurationManager.ConnectionStrings[connectionstring].ConnectionString,
-                            _createdtemp.UserCom);
-                    }
-
-                    if (_updatedtemp != null && _updatedtemp.UserCom != string.Empty)
-                    {
-                        trupdatecom.Visible = true;
-                        lblupdatedcom.Text = ACL.OracleClass.User.GetCompany(
-                            ConfigurationManager.ConnectionStrings[connectionstring].ConnectionString,
-                            _updatedtemp.UserCom);
-                    }
-                }
 
                 if (AuditTrailDisplayType != DisplayType.Name)
                 {
@@ -351,16 +278,9 @@ public partial class App_Module_Controller_GSN : System.Web.UI.UserControl
                     _updatedtext = GenerateText(_updatedtext, " ID : " + UpdatedBy);
                 }
 
-                if (_createdtemp != null && _createdtemp.EmployeeName != string.Empty)
-                    _createdtext = GenerateText(_createdtext, " Name : " + _createdtemp.EmployeeName);
-
-                if (_updatedtemp != null && _updatedtemp.EmployeeName != string.Empty)
-                    _updatedtext = GenerateText(_updatedtext, " Name : " + _updatedtemp.EmployeeName);
-
                 lblcreatedby.Text = _createdtext;
                 lblcreateddate.Text = CreatedDate.ToString(DateTimeFormat);
                 lblcreatedloc.Text = CreatedLoc;
-
                 lblupdatedby.Text = _updatedtext;
                 lblupdateddate.Text = UpdatedDate.ToString(DateTimeFormat);
                 lblUpdatedloc.Text = UpdatedLoc;

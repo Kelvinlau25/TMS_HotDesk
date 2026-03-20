@@ -14,7 +14,7 @@ public partial class Acc_MenuNavigationPrai : System.Web.UI.Page
         pnlhd.Controls.Clear();
         int i1 = 0, i2 = 0, ii = 0, iii = 0;
 
-        DataTable lst = BLL.MenuNav.GetIDList();
+        DataTable lst = BLL.MenuNavPrai.GetIDList();
 
         for (i1 = 1; i1 <= lst.Rows.Count; i1++)
         {
