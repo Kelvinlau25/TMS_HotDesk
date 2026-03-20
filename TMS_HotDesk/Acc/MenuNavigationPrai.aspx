@@ -719,7 +719,7 @@ chk=i;
           <div id="dropdowncontent1" class="dropdown-content dc" >
             
               <asp:Panel runat="server" ID="pnlhd1" CssClass="pnlhd"><div class="label8a"></div><%--<div class="label5a">Biz Dev.</div><div class="label15a">Finance</div><div class="label9a">Reserved</div><div class="label17a">Reserved</div><div class="label14a">Finance</div><div class="label18a">Reserved</div><div class="label69a">Reserved</div>--%></asp:Panel>
-           <asp:Image ID="Image1" runat="server" Height="" Width="" ImageUrl="../Acc/left.png" usemap="#simple" CssClass="map" />
+           <asp:Image ID="Image1" runat="server" Height="" Width="" ImageUrl="../Acc/leftPrai.png" usemap="#simple" CssClass="map" />
                 <map  id="tabs" class="tabs" name="simple">
                     <!--left top-->
 <%--<area alt="" title=""  shape="poly" id="map1"  coords="244,74,327,74,327,141,244,141,244,74"  />
@@ -787,7 +787,7 @@ chk=i;
             <%--east wing--%>
           <div id="dropdowncontent2" class="dropdown-content2 dc">
            <asp:Panel runat="server" ID="pnlhd2" CssClass="pnlhd pnlhd2"><div class="label41a">Help Desk</div><%--<div class="label39a">Tech Support</div><div class="label36a">Tech Support</div><div class="label74a">Tech Support</div><div class="label37a">Tech Support</div>--%></asp:Panel>
-            <asp:Image ID="Image2" runat="server" ImageUrl="../Acc/right.png" usemap="#Image2" CssClass="map" />
+            <asp:Image ID="Image2" runat="server" ImageUrl="../Acc/rightPrai.png" usemap="#Image2" CssClass="map" />
               <map  id="tabs2" class="tabs" name="Image2">
 
                 <!-- left -->
@@ -846,7 +846,7 @@ chk=i;
           
            <div id="dropdowncontent3" class="dropdown-content3 dc">
            <asp:Panel runat="server" ID="pnlhd3" CssClass="pnlhd pnlhd3"></asp:Panel>
-            <asp:Image ID="Image3" runat="server" ImageUrl="../Acc/last.png" usemap="#Image3" CssClass="map" />
+            <asp:Image ID="Image3" runat="server" ImageUrl="../Acc/lastPrai.png" usemap="#Image3" CssClass="map" />
               <map  id="tabs3" class="tabs" name="Image3">
 
                 <!-- left -->
