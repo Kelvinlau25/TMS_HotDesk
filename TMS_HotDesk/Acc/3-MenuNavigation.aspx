@@ -361,7 +361,7 @@ width:160px;
          
           <div id="dropdowncontent1" class="dropdown-content dc" >
               <asp:Panel runat="server" ID="pnlhd1" CssClass="pnlhd"></asp:Panel>
-           <asp:Image ID="Image1" runat="server" Height="" Width="" ImageUrl="../Acc/left.png" usemap="#simple" CssClass="map" />
+           <asp:Image ID="Image1" runat="server" Height="" Width="" ImageUrl="../Acc/leftSpice.png" usemap="#simple" CssClass="map" />
                 <map  id="tabs" class="tabs" name="simple">
       
                     
@@ -420,7 +420,7 @@ width:160px;
           </div>
           <div id="dropdowncontent2" class="dropdown-content2 dc">
            <asp:Panel runat="server" ID="pnlhd2" CssClass="pnlhd pnlhd2"></asp:Panel>
-            <asp:Image ID="Image2" runat="server" ImageUrl="../Acc/right.png" usemap="#Image2" CssClass="map" />
+            <asp:Image ID="Image2" runat="server" ImageUrl="../Acc/rightSpice.png" usemap="#Image2" CssClass="map" />
               <map  id="Map1" class="tabs" name="Image2">
 
                 <!-- left -->
