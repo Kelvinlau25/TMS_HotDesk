@@ -6,4 +6,4 @@ obj/
 *.cache
 *.pdb
 *.dll
-packages/
+packages/.nuget/
