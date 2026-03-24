@@ -9,6 +9,20 @@ namespace Library.Oraclecls
         protected OracleDataReader _rdr;
         protected OracleTransaction _tran;
 
+        private static System.Collections.Concurrent.ConcurrentDictionary<string, string> _registeredConnectionStrings
+            = new System.Collections.Concurrent.ConcurrentDictionary<string, string>();
+
+        /// <summary>
+        /// Register a connection string from ASP.NET Core IConfiguration at startup.
+        /// </summary>
+        public static void RegisterConnectionString(string name, string connectionString)
+        {
+            if (!string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(connectionString))
+            {
+                _registeredConnectionStrings[name] = connectionString;
+            }
+        }
+
         private string _constr = string.Empty;
         public string ConnectionString
         {
@@ -18,9 +32,19 @@ namespace Library.Oraclecls
 
         public Connection(string connectionStringName)
         {
-            this.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings[connectionStringName].ToString();
+            // Try registered connection strings first (ASP.NET Core IConfiguration),
+            // then fall back to ConfigurationManager (legacy .NET Framework config).
+            if (_registeredConnectionStrings.TryGetValue(connectionStringName, out var registeredConnStr))
+            {
+                this.ConnectionString = registeredConnStr;
+            }
+            else
+            {
+                var cs = System.Configuration.ConfigurationManager.ConnectionStrings[connectionStringName];
+                this.ConnectionString = cs?.ToString() ?? string.Empty;
+            }
 
-            if (ConnectionString == string.Empty)
+            if (string.IsNullOrEmpty(ConnectionString))
             {
                 throw new System.Exception("Invalid Connection String Name That Set At Web Config");
             }
