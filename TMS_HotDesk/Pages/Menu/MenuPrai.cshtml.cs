@@ -36,8 +36,6 @@ namespace TMS_HotDesk.Pages.Menu
             HttpContext.Session.SetString("gstrUserCom", "04");
             HttpContext.Session.SetString("com", "04");
 
-            ListJson = "[]";
-
             int hour = DateTime.Now.Hour;
             if (hour < 12)
             {
