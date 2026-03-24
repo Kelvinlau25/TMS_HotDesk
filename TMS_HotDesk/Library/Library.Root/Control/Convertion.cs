@@ -21,7 +21,7 @@ namespace Library.Root.Control
         /// <returns></returns>
         public static List<T> Deserializer(string stringFormat)
         {
-            return JsonSerializer.Deserialize<List<T>>(stringFormat);
+            return JsonSerializer.Deserialize<List<T>>(stringFormat) ?? new List<T>();
         }
     }
 }
