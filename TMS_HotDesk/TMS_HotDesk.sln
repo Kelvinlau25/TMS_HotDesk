@@ -2,39 +2,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.36811.4
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library.Common", "Library\Library.Common\Library.Common.csproj", "{1322656D-2FAA-4F49-A511-3696DFC1D29C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Library.WebFormsAdapter", "Library\Library.WebFormsAdapter\Library.WebFormsAdapter.csproj", "{B1C2D3E4-F5A6-7890-BCDE-F12345678901}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library.Control.Base", "Library\Library.Control.Base\Library.Control.Base.csproj", "{D4618A4B-AAEE-415B-AF2C-0874920E87C3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Library.Common", "Library\Library.Common\Library.Common.csproj", "{1322656D-2FAA-4F49-A511-3696DFC1D29C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library.Root", "Library\Library.Root\Library.Root.csproj", "{4695AB18-FF22-4CEF-98C0-C413082AA932}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Library.Control.Base", "Library\Library.Control.Base\Library.Control.Base.csproj", "{D4618A4B-AAEE-415B-AF2C-0874920E87C3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library.SQLServer", "Library\Library.SQLServer\Library.SQLServer.csproj", "{0A1F849F-46BC-4255-A499-7D1F76055D36}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Library.Root", "Library\Library.Root\Library.Root.csproj", "{4695AB18-FF22-4CEF-98C0-C413082AA932}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library.Database", "Library\Library.Database\Library.Database.csproj", "{55AE13FA-8E18-493E-9BFB-5130A9BF3DB5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Library.SQLServer", "Library\Library.SQLServer\Library.SQLServer.csproj", "{0A1F849F-46BC-4255-A499-7D1F76055D36}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library.Oracle", "Library\Library.Oracle\Library.Oracle.csproj", "{88F0907B-957B-4389-8CEE-08EB846EF8BA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Library.Oracle", "Library\Library.Oracle\Library.Oracle.csproj", "{88F0907B-957B-4389-8CEE-08EB846EF8BA}"
 EndProject
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "TMS_HotDesk", ".", "{E9EF7BC2-961E-D378-18F5-54F39662138D}"
-	ProjectSection(WebsiteProperties) = preProject
-		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.8"
-		ProjectReferences = "{1322656d-2faa-4f49-a511-3696dfc1d29c}|Library.common.dll;{d4618a4b-aaee-415b-af2c-0874920e87c3}|Library.Control.Base.dll;{55ae13fa-8e18-493e-9bfb-5130a9bf3db5}|Library.Database.dll;{88F0907B-957B-4389-8CEE-08EB846EF8BA}|Library.Oraclecls.dll;{4695AB18-FF22-4CEF-98C0-C413082AA932}|Library.Root.dll;{0A1F849F-46BC-4255-A499-7D1F76055D36}|Library.SQLServer.dll;"
-		Debug.AspNetCompiler.VirtualPath = "/localhost_49202"
-		Debug.AspNetCompiler.PhysicalPath = "..\TMS_HotDesk\"
-		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_49202\"
-		Debug.AspNetCompiler.Updateable = "true"
-		Debug.AspNetCompiler.ForceOverwrite = "true"
-		Debug.AspNetCompiler.FixedNames = "false"
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.VirtualPath = "/localhost_49202"
-		Release.AspNetCompiler.PhysicalPath = "..\TMS_HotDesk\"
-		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_49202\"
-		Release.AspNetCompiler.Updateable = "true"
-		Release.AspNetCompiler.ForceOverwrite = "true"
-		Release.AspNetCompiler.FixedNames = "false"
-		Release.AspNetCompiler.Debug = "False"
-		VWDPort = "49202"
-		SlnRelativePath = "..\TMS_HotDesk\"
-	EndProjectSection
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Library.Database", "Library\Library.Database\Library.Database.csproj", "{55AE13FA-8E18-493E-9BFB-5130A9BF3DB5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TMS_HotDesk", "TMS_HotDesk.csproj", "{E9EF7BC2-961E-D378-18F5-54F39662138D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,6 +24,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B1C2D3E4-F5A6-7890-BCDE-F12345678901}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1C2D3E4-F5A6-7890-BCDE-F12345678901}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1C2D3E4-F5A6-7890-BCDE-F12345678901}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1C2D3E4-F5A6-7890-BCDE-F12345678901}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1322656D-2FAA-4F49-A511-3696DFC1D29C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1322656D-2FAA-4F49-A511-3696DFC1D29C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1322656D-2FAA-4F49-A511-3696DFC1D29C}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -68,8 +54,8 @@ Global
 		{88F0907B-957B-4389-8CEE-08EB846EF8BA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E9EF7BC2-961E-D378-18F5-54F39662138D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E9EF7BC2-961E-D378-18F5-54F39662138D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E9EF7BC2-961E-D378-18F5-54F39662138D}.Release|Any CPU.ActiveCfg = Debug|Any CPU
-		{E9EF7BC2-961E-D378-18F5-54F39662138D}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{E9EF7BC2-961E-D378-18F5-54F39662138D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9EF7BC2-961E-D378-18F5-54F39662138D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
