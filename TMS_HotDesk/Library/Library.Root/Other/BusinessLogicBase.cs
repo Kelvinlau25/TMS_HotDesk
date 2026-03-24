@@ -10,6 +10,16 @@ namespace Library.Root.Other
             Malay = 1
         }
 
+        private static string _maxRowPerPage = null;
+
+        /// <summary>
+        /// Register the MaxRowPerPage setting from ASP.NET Core IConfiguration at startup.
+        /// </summary>
+        public static void RegisterMaxRowPerPage(string value)
+        {
+            _maxRowPerPage = value;
+        }
+
         public static LanguagePack Language
         {
             get
@@ -32,7 +42,14 @@ namespace Library.Root.Other
         {
             get
             {
-                return (int)(System.Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["MaxRowPerPage"].ToString()));
+                // Try registered value first (ASP.NET Core IConfiguration),
+                // then fall back to ConfigurationManager (legacy .NET Framework config).
+                string val = _maxRowPerPage;
+                if (string.IsNullOrEmpty(val))
+                {
+                    val = System.Configuration.ConfigurationManager.AppSettings["MaxRowPerPage"];
+                }
+                return (int)(System.Convert.ToInt32(val ?? "10"));
             }
         }
 
