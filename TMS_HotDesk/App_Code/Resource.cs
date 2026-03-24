@@ -1,10 +1,5 @@
 using System.Reflection;
 using System.Resources;
-using System.Globalization;
-using System.IO;
-using System.Drawing.Drawing2D;
-using System.Drawing;
-using System.Drawing.Imaging;
 
 namespace Control
 {
