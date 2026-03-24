@@ -1,0 +1,887 @@
+@page
+@model TMS_HotDesk.Pages.Acc.MenuNavigationPraiModel
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "TMS Check In";
+}
+
+@section Head {
+    <script type="text/javascript">
+        var popupWindow=null;
+
+        function popupwindow(ID, Name) {
+            if( document.getElementById('txtStaffName').value == "") {
+                var w = 800;
+                var h = 600;
+                var left = (screen.width/2)-(w/2);
+                var top = (screen.height/2)-(h/2);
+                popupWindow = window.open('/Acc/PopUp/ListPrai?itm1=' + ID + '&itm2=' + Name,'PopUp', 'directories=no,titlebar=no,toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=no,width=800,height=600,top='+top+', left='+left +'');
+            }
+            else {  
+                document.getElementById('txtStaffName').value = "";
+                document.getElementById('txtStaffID').value = "";
+            }
+        };
+
+        function parent_disable() {
+            if(popupWindow && !popupWindow.closed)
+            popupWindow.focus();
+        }
+    </script>
+  
+    <script src="../jss/jquery.1.7.2.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="../jss/jquery.maphilight.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#dropdowncontent1").show();
+            document.getElementById("warehouse1").style.backgroundColor = "BLUE";
+            $("#dropdowncontent2").show();
+            $("#dropdowncontent3").show();
+        
+            $(".pnlhd2").hide();
+            $(".pnlhd3").hide();
+  
+            $("#warehouse1").click(function(){
+                document.getElementById("warehouse1").style.backgroundColor = "BLUE";
+                document.getElementById("warehouse2").style.backgroundColor = "BLACK"; 
+                document.getElementById("warehouse3").style.backgroundColor = "BLACK";     
+                document.getElementById("checkInList").style.backgroundColor = "BLACK"; 
+                document.getElementById("checkInList2").style.backgroundColor = "BLACK";  
+                $("#dropdowncontent1").show();
+                $("#dropdowncontent2").hide();
+                $("#dropdowncontent3").hide();
+                $("#dropdowncontent5").hide();
+                $("#dropdowncontent4").hide();
+                $(".pnlhd2").hide();
+                $(".pnlhd3").hide();
+            });
+            $("#warehouse2").click(function(){
+                document.getElementById("warehouse1").style.backgroundColor = "BLACK";
+                document.getElementById("warehouse2").style.backgroundColor = "BLUE";  
+                document.getElementById("warehouse3").style.backgroundColor = "BLACK";   
+                document.getElementById("checkInList").style.backgroundColor = "BLACK";
+                document.getElementById("checkInList2").style.backgroundColor = "BLACK";  
+                $("#dropdowncontent1").hide();
+                $("#dropdowncontent2").show();
+                $("#dropdowncontent3").hide();
+                $("#dropdowncontent5").hide();
+                $("#dropdowncontent4").hide();
+                $(".pnlhd2").show();
+                $(".pnlhd3").hide();
+            });
+            $("#warehouse3").click(function(){
+                document.getElementById("warehouse1").style.backgroundColor = "BLACK";
+                document.getElementById("warehouse2").style.backgroundColor = "BLACK"; 
+                document.getElementById("warehouse3").style.backgroundColor = "BLUE";    
+                document.getElementById("checkInList").style.backgroundColor = "BLACK";
+                document.getElementById("checkInList2").style.backgroundColor = "BLACK";  
+                $("#dropdowncontent1").hide();
+                $("#dropdowncontent2").hide();
+                $("#dropdowncontent3").show();
+                $("#dropdowncontent5").hide();
+                $("#dropdowncontent4").hide();
+                $(".pnlhd2").hide();
+                $(".pnlhd3").show();
+            });
+            $("#checkInList").click(function(){
+                document.getElementById("frame1").src = '/Acc/PopUp/List2';
+                document.getElementById("warehouse1").style.backgroundColor = "BLACK";
+                document.getElementById("warehouse2").style.backgroundColor = "BLACK"; 
+                document.getElementById("warehouse3").style.backgroundColor = "BLACK";  
+                document.getElementById("checkInList").style.backgroundColor = "BLUE";  
+                document.getElementById("checkInList2").style.backgroundColor = "BLACK";     
+                $("#dropdowncontent1").hide();
+                $("#dropdowncontent2").hide();
+                $("#dropdowncontent3").hide();
+                $("#dropdowncontent5").hide();
+                $("#dropdowncontent5").hide();
+                $("#dropdowncontent4").show();
+                $(".pnlhd2").hide();
+                $(".pnlhd3").hide();
+            });
+    
+            $("#checkInList2").click(function(){
+                document.getElementById("Iframe2").src = '/Acc/PopUp/List3Prai';
+                document.getElementById("warehouse1").style.backgroundColor = "BLACK";
+                document.getElementById("warehouse2").style.backgroundColor = "BLACK"; 
+                document.getElementById("warehouse3").style.backgroundColor = "BLACK";  
+                document.getElementById("checkInList").style.backgroundColor = "BLACK";  
+                document.getElementById("checkInList2").style.backgroundColor = "BLUE";      
+                $("#dropdowncontent1").hide();
+                $("#dropdowncontent2").hide();
+                $("#dropdowncontent3").hide();
+                $("#dropdowncontent5").show();
+                $("#dropdowncontent4").hide();
+
+                $(".pnlhd2").hide();
+                $(".pnlhd3").hide();
+            });
+
+        });
+
+        window.onload = function(){
+  
+            $(".wrapdrop").hide();
+            ShowCurrentTime() ;
+        
+        };
+
+        function ShowCurrentTime() {
+            var dt = new Date();
+            document.getElementById("lblTime").innerHTML = dt.format("dd/MM/yyyy hh:mm:ss");;
+            window.setTimeout("ShowCurrentTime()", 1000);
+        }
+    </script>
+
+    <script type ="text/javascript" src="../js/jquery.colorbox.js"></script>
+    <link rel="stylesheet" href ="../css/colorbox.css" />
+    <link href="../css_new/TMSAccessPrai.css" rel="stylesheet" type="text/css" />
+
+    <script type="text/javascript" >
+        function testing(checktype, staffName, seatName) {
+            fetch('/Acc/MenuNavigationPrai?handler=Testing', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]')?.value || ''
+                },
+                body: JSON.stringify({ checktype: checktype, staffName: staffName, seatName: seatName })
+            })
+            .then(function(res) { return res.json(); })
+            .then(function(response) { OnSuccess(response); })
+            .catch(function(err) { alert('Error: ' + err); });
+        }
+
+        function OnSuccess(response)
+        { setTimeout(function() { location.reload(); }, 50000); alert(response); }
+
+        $(document).ready(function(){
+            var disable = ['2', '3', '6','11', '20', '22']
+            //var disable = ['2', '3', '6','11', '20', '22', '46', '53']
+            //[2, 3, 6, 7, 9, 11, 14, 16, 18, 20, 22, 31, 32, 35, 37, 38, 41, 43, 45, 48, 50, 52, 64, 65]
+            //$(".youtube").colorbox({iframe:true, innerWidth:900, innerHeight:500});
+            $('.dc input').click(function(){ 
+                var classname = this.className ;
+                var str =classname.substring(5);
+                var mapclass = "map" + str;
+         
+                if( document.getElementById('txtStaffName').value == "")
+                {
+                    //map52 no more JJ 20190117
+                    // if( mapclass == "map24" ||  mapclass == "map27" ||  mapclass == "map46"||  mapclass == "map53" ||  mapclass == "map51"||  mapclass == "map52"  ){
+                    //map51 no more yeow 20190308
+                    // if( mapclass == "map24" ||  mapclass == "map27" ||  mapclass == "map46"||  mapclass == "map53" ||  mapclass == "map51"  ){
+                    //if (mapclass == "map24" || mapclass == "map27") {// ||  mapclass == "map46"||  mapclass == "map53"  ){
+                    //      return false;
+                          
+                    //}
+                    /*christopher leong_28 April 2020 - disable certain desk check in
+                    refer to disable1 list, if inside list means it is disabled
+                    this.id.substring(3, 5) --> get last 2 digit of the area id*/
+                    var num1 = this.id.substring(3, 5);
+
+                    if (disable.indexOf(num1) != -1) {
+                   
+                       return false;
+                    }
+                    else {
+                           if (confirm('Are you sure you want to check out from this desk?')) {
+                              
+                                testing("OUT","",mapclass);
+                                return false;
+                           } else {
+                                return false;
+                           }
+                    }
+                       
+                           
+                }
+                else
+                {
+                    return false;
+                }
+            });
+            
+            if ($('#btnCheck').val()=="Check In/Out"){
+                
+                      
+                $('.tabs area').click(function () { 
+                    if ($(this ).hasClass( "red" )){
+                 
+
+                    }else{
+                    
+                        var x = $.trim(document.getElementById('txtStaffName').value);
+                        console.log(x)
+                        if( document.getElementById('txtStaffID').value == "" )
+                        {
+                            alert(document.getElementById('txtStaffID').value);
+                              return false;
+                        }
+                        else
+                        {  
+                            //if( this.id == "map12")
+                            // if( this.id == "map24" ||  this.id == "map27" ||  this.id == "map51"||  this.id == "map53" ||  this.id == "map52"||  this.id == "map46" ){
+                            //map52 no more JJ 20190117
+                            //map51 no more yeow 20190308
+                            // if( this.id == "map24" ||  this.id == "map27" ||  this.id == "map51"||  this.id == "map53" ||  this.id == "map46" ){
+                            //  if( this.id == "map24" ||  this.id == "map27" ||  this.id == "map53" ||  this.id == "map46" ){
+                            //return false;
+                          
+                            //}
+                            /*christopher leong_28 April 2020 - disable certain desk check in
+                            refer to disable1 list, if inside list means it is disabled
+                            this.id.substring(3, 5) --> get last 2 digit of the area id*/
+                            var num = this.id.substring(3, 5);
+                            console.log(num);
+                            console.log(this.id);
+                            if (disable.indexOf(num) != -1) {
+
+                                return false;
+                            }
+                            else if( this.id == "map25"){
+                                if( x == "LIM POH HIANG" ) //
+                                {
+                                    if (confirm('Are you sure you want to check in this desk?' )) {
+
+                                    //testing("IN",document.getElementById('frame1').value,this.id);
+                                    testing("IN",document.getElementById('txtStaffName').value,this.id);
+                                    } else {
+                                    return false;
+                                    
+                                    }
+                                }
+                                else{
+                               
+                                    // return false;
+                                     alert("Sorry, you are not allowed to check in this desk.");
+                                }
+                            }
+                            else if( this.id == "map28"){
+                                if( x == "OOI YINN LING" ) //
+                                {
+                                    if (confirm('Are you sure you want to check in this desk?' )) {
+
+                                    //testing("IN",document.getElementById('Iframe2').value,this.id);
+                                    testing("IN",document.getElementById('txtStaffName').value,this.id);
+                                    } else {
+                                        return false;
+                                    
+                                    }
+                                }
+                                else{
+                               
+                                    // return false;
+                                     alert("Sorry, you are not allowed to check in this desk.");
+                                }
+                            }
+                            else if( this.id == "map13"){
+                                 if( x == "CHEAH SIANG FERN" ) //
+                                 {
+                                    if (confirm('Are you sure you want to check in this desk?' )) {
+                                      
+                                        testing("IN",document.getElementById('txtStaffName').value,this.id);
+                                    } else {
+                                    return false;
+                                    
+                                    }
+                                 }
+                                 else{
+                               
+                                    // return false;
+                                     alert("Sorry, you are not allowed to check in this desk.");
+                                 }
+                            }
+
+                            else if( this.id == "map24"){
+                                 if( x == "CHAN KIEN WAH" ) //
+                                 {
+                                    if (confirm('Are you sure you want to check in this desk?' )) {
+                                      
+                                        testing("IN",document.getElementById('txtStaffName').value,this.id);
+                                    } else {
+                                    return false;
+                                    
+                                    }
+                                 }
+                                 else{
+                               
+                                    // return false;
+                                     alert("Sorry, you are not allowed to check in this desk.");
+                                 }
+                            }
+
+                            else if( this.id == "map27"){
+                                 if( x == "KATSUHIKO DAIDO" ) //
+                                 {
+                                    if (confirm('Are you sure you want to check in this desk?' )) {
+                                      
+                                        testing("IN",document.getElementById('txtStaffName').value,this.id);
+                                    } else {
+                                    return false;
+                                    
+                                    }
+                                 }
+                                 else{
+                               
+                                    // return false;
+                                     alert("Sorry, you are not allowed to check in this desk.");
+                                 }
+                            }
+                          
+
+                            else if( this.id == "map5"){
+                                if( x == "CATHERINE SAW" ) 
+                                {
+                                    if (confirm('Are you sure you want to check in this desk?' )) {
+
+                                    //testing("IN",document.getElementById('Iframe2').value,this.id);
+                                    testing("IN",document.getElementById('txtStaffName').value,this.id);
+                                    } else {
+                                        return false;
+                                    
+                                    }
+                                }
+                                else{
+                               
+                                    // return false;
+                                     alert("Sorry, you are not allowed to check in this desk.");
+                                }
+                            }
+                            else if( this.id == "map7"){
+                                if( x == "NG WEI KEE" ) 
+                                {
+                                    if (confirm('Are you sure you want to check in this desk?' )) {
+
+                                    //testing("IN",document.getElementById('Iframe2').value,this.id);
+                                    testing("IN",document.getElementById('txtStaffName').value,this.id);
+                                    } else {
+                                        return false;
+                                    
+                                    }
+                                }
+                                else{
+                               
+                                    // return false;
+                                     alert("Sorry, you are not allowed to check in this desk.");
+                                }
+                            }
+                            else if( this.id == "map8"){
+                                if( x == "KHNG JIA SHAN" ) 
+                                {
+                                    if (confirm('Are you sure you want to check in this desk?' )) {
+
+                                    //testing("IN",document.getElementById('Iframe2').value,this.id);
+                                        testing("IN", document.getElementById('txtStaffName').value, this.id);
+                                        
+                                    } else {
+                                        return false;
+                                    
+                                    }
+                                }
+                                else{
+                               
+                                    // return false;
+                                     alert("Sorry, you are not allowed to check in this desk.");
+                                }
+                            }
+                            else if( this.id == "map15"){
+                                if( x == "TAN SIEW YONG" ) 
+                                {
+                                    if (confirm('Are you sure you want to check in this desk?' )) {
+
+                                    //testing("IN",document.getElementById('Iframe2').value,this.id);
+                                    testing("IN",document.getElementById('txtStaffName').value,this.id);
+                                    } else {
+                                        return false;
+                                    
+                                    }
+                                }
+                                else{
+                               
+                                    // return false;
+                                     alert("Sorry, you are not allowed to check in this desk.");
+                                }
+                            }
+                            else if( this.id == "map9"){
+                                if( x == "TAN SHI YIN" ) 
+                                {
+                                    if (confirm('Are you sure you want to check in this desk?' )) {
+
+                                    //testing("IN",document.getElementById('Iframe2').value,this.id);
+                                    testing("IN",document.getElementById('txtStaffName').value,this.id);
+                                    } else {
+                                        return false;
+                                    
+                                    }
+                                }
+                                else{
+                               
+                                    // return false;
+                                     alert("Sorry, you are not allowed to check in this desk.");
+                                }
+                            }
+                            else if( this.id == "map15"){
+                                if( x == "TAN YIN LING" ) 
+                                {
+                                    if (confirm('Are you sure you want to check in this desk?' )) {
+
+                                    //testing("IN",document.getElementById('Iframe2').value,this.id);
+                                    testing("IN",document.getElementById('txtStaffName').value,this.id);
+                                    } else {
+                                        return false;
+                                    
+                                    }
+                                }
+                                else{
+                               
+                                    // return false;
+                                     alert("Sorry, you are not allowed to check in this desk.");
+                                }
+                            }
+                            /*else if( this.id == "map39"){
+                                 if( x == "ONG KHAI JOON" ) 
+                                 {
+                                     if (confirm('Are you sure you want to check in this desk?' )) {
+
+                                     //testing("IN",document.getElementById('Iframe2').value,this.id);
+                                     testing("IN",document.getElementById('txtStaffName').value,this.id);
+                                     } else {
+                                         return false;
+                                    
+                                     }
+                                 }
+                                 else{
+                               
+                                     // return false;
+                                      alert("Sorry, you are not allowed to check in this desk.");
+                                 }
+                            }*/
+                            else if( this.id == "map36"){
+                                if( x == "LUM KAH WEI" ) 
+                                {
+                                    if (confirm('Are you sure you want to check in this desk?' )) {
+
+                                    //testing("IN",document.getElementById('Iframe2').value,this.id);
+                                    testing("IN",document.getElementById('txtStaffName').value,this.id);
+                                    } else {
+                                        return false;
+                                    
+                                    }
+                                }
+                                else{
+                               
+                                    // return false;
+                                     alert("Sorry, you are not allowed to check in this desk.");
+                                }
+                            }
+                            else if( this.id == "map74"){
+                                if( x == "LOKMAN HARITH BIN ZUKIFLI" ) 
+                                {
+                                    if (confirm('Are you sure you want to check in this desk?' )) {
+
+                                    //testing("IN",document.getElementById('Iframe2').value,this.id);
+                                    testing("IN",document.getElementById('txtStaffName').value,this.id);
+                                    } else {
+                                        return false;
+                                    
+                                    }
+                                }
+                                else{
+                               
+                                    // return false;
+                                     alert("Sorry, you are not allowed to check in this desk.");
+                                }
+                            }
+                            else if( this.id == "map41"){
+                                if( x == "PAVITHIRA KRISNADAS" ) 
+                                {
+                                    if (confirm('Are you sure you want to check in this desk?' )) {
+
+                                    //testing("IN",document.getElementById('Iframe2').value,this.id);
+                                    testing("IN",document.getElementById('txtStaffName').value,this.id);
+                                    } else {
+                                        return false;
+                                    
+                                    }
+                                }
+                                else{
+                               
+                                    // return false;
+                                     alert("Sorry, you are not allowed to check in this desk.");
+                                }
+                            }
+                            /*else if( this.id == "map26"){
+                                 if( x == "SIVANESWARAN" ) 
+                                 {
+                                     if (confirm('Are you sure you want to check in this desk?' )) {
+
+                                    //testing("IN",document.getElementById('Iframe2').value,this.id);
+                                     testing("IN",document.getElementById('txtStaffName').value,this.id);
+                                     } else {
+                                         return false;
+                                    
+                                     }
+                                 }
+                                 else{
+                               
+                                     // return false;
+                                      alert("Sorry, you are not allowed to check in this desk.");
+                                 }
+                            }*/
+                            
+                            /*else if (this.id = "map38")
+                            {
+                                if (x == "CHARLENE CHONG SEOK YUN")
+                                {
+                                   if (confirm('Are you sure you want to check in this desk?' )) {
+                                      
+                                        testing("IN",document.getElementById('btnCheck').value,this.id);
+                                   }                                            
+                                }
+                                   
+                            }*/
+
+                            
+
+                            else {
+                                if (confirm('Are you sure you want to check in this desk?' )) {
+                              
+                                    testing("IN",document.getElementById('txtStaffName').value,this.id);
+                                } else {
+                                    return false;
+                                }
+                            }
+                         
+                      
+                            
+                        }
+                    };
+                    
+                });
+            };
+        });
+    </script>
+
+    <script type="text/javascript">
+
+        $(function() {
+          $(".map").maphilight({fillOpacity:1,fillColor:'0ef748'})
+        });
+ 
+        $(document).ready(function(){  
+
+            var chk;
+
+            var i=1;
+
+            for (i; i <80; i++) { //for (i; i <54; i++)
+                var disableColor = [2, 3, 5, 6, 7, 8, 9, 11, 15, 16, 20, 22, 26, 36, 41, 67];
+                var a;
+                if (chk==i){
+                    alert("ERROR occur");
+                    location.reload;
+                }
+                else{
+                    chk=i;
+                }
+                //alert(i);
+    
+              
+                if (document.querySelector('.hi' + i).value[0] == 1) {
+                      
+                    var abc = 'map' + i;
+                    var cur = $('#'+abc);
+                    var data = cur.data('maphilight') || {};
+                    data.alwaysOn = !data.alwaysOn;
+             
+                    data.fillColor = 'ffcccc'; //red
+                    data.strokeColor = 'f84c24';
+                    cur.data('maphilight', data).trigger('alwaysOn.maphilight');
+                    cur.addClass('red');
+                  
+                }
+
+          
+              
+        
+                //added by Christopher Leong_29 April 2020
+                //add condition to filter out map8(helpdesk desk)
+                //else if (document.querySelector('.hi' + i).value[0]==2) {
+                else if (document.querySelector('.hi' + i).value[0] == 2) {
+                    
+                    var abc = 'map'+ i;
+                    var cur = $('#'+abc);
+                    var data = cur.data('maphilight') || {};
+                    
+                    data.alwaysOn = !data.alwaysOn;
+                    data.fillColor = '7b7b7b';//grey
+                    data.strokeColor = '7b7b7b';
+                    cur.data('maphilight', data).trigger('alwaysOn.maphilight');
+                    cur.addClass('black');
+                }
+                else{
+                    // alert('map'+ i);
+                    //refer to var disable
+                    a = disableColor.indexOf(i);
+            
+                    if (a == -1) {
+                        var abc = 'map' + i;
+                        var cur = $('#'+abc);
+                        var data = cur.data('maphilight') || {};
+                        data.fillColor = 'b3ffcc'; //green
+                        data.strokeColor = 'b3ffcc';
+                        data.alwaysOn = !data.alwaysOn;
+                        cur.data('maphilight', data).trigger('alwaysOn.maphilight');
+                        cur.addClass('green');
+                    }
+                    else {
+                        var abc = 'map' + i;
+                        var cur = $('#'+abc);
+                        var data = cur.data('maphilight') || {};
+                        data.fillColor = '414141'; //gray
+                        data.strokeColor = '414141';
+                        data.alwaysOn = !data.alwaysOn;
+                        cur.data('maphilight', data).trigger('alwaysOn.maphilight');
+                        cur.addClass('gray');
+                    }
+                }
+             
+
+            }
+          
+        });
+        
+       
+        
+    </script>
+		
+    <style>
+        .dropbtn
+        {
+            -webkit-appearance: none;
+            width:140px;
+            font-size:18px;
+            padding: 16px 0;
+        }
+        .lbldate
+        {
+            position:absolute;
+            z-index:100px;
+            color:White;
+            top:15px;
+            right:20px;
+            height:20px;
+        }
+    </style>
+}
+
+@Html.AntiForgeryToken()
+
+<div id="pnlhd" class="pnlhd">
+    @if (Model.SeatData != null)
+    {
+        @for (int i = 0; i < Model.SeatData.Rows.Count; i++)
+        {
+            var row = Model.SeatData.Rows[i];
+            var seatStatus = row["SEAT_STATUS"].ToString().ToUpper();
+            var hiddenValue = "0";
+            if (seatStatus == "Y")
+            {
+                hiddenValue = "1 " + row["SEAT_STATUS"].ToString();
+            }
+            <input type="hidden" id="hi@(i + 1)" class="hi@(i + 1)" value="@hiddenValue" />
+        }
+    }
+</div>
+
+<label id="lblTime" style=" font-weight:bold" class="lbldate" ></label>
+<div class="header">
+    <h2>TMS PRAI Hot Desking System</h2>
+</div>
+<div class="wrap">
+    <div class="mtest center">
+        <div class="btnlist">
+            <input type='button' id='warehouse1' value='West Wing' class="dropbtn" />
+            <input type='button' id='warehouse2' value='East Wing' class="dropbtn" />
+            <input type='button' id='warehouse3' value='Ai Home' class="dropbtn" />
+            <input type='button' id='checkInList' value='Last Person' class="dropbtn" />
+            <input type='button' id='checkInList2' value='Arm Record' class="dropbtn" />
+        </div>
+        
+        <div class="btnlist right absolute"> 
+            <button type="button" id="btnCheck" class="dropbtn " onclick="popupwindow('txtStaffID','txtStaffName'); return false;">Check In/Out</button>
+        </div>
+    </div>
+    <div class="wrapdrop"><h2></h2> </div>
+    <div class="wrap hidedrop">
+         
+        <div class="dropdown">
+            <div style="background:white; width:727px; z-index:100; position:absolute; top:130px;">&nbsp; 
+                <input type="text" id="txtStaffID" class="txtReadOnly txtStaffID txt" style="BORDER-WIDTH:0PX;COLOR:black;BACKGROUND-COLOR:Transparent; font-size:22PX; width:200px;font-weight:bold;" value="" disabled />&nbsp; &nbsp; 
+                <input type="text" id="txtStaffName" class="txtReadOnly txtStaffName txt" style="BORDER-WIDTH:0PX;COLOR:black;BACKGROUND-COLOR:Transparent; font-size:22PX; font-weight:bold; width:350px;" value="" disabled />
+                <label id="userID" class="LabelChange" style=" color:white;font-size:18px;  padding-left:100px;"></label>
+            </div>
+         
+            <div id="dropdowncontent1" class="dropdown-content dc" >
+            
+                <div id="pnlhd1" class="pnlhd"><div class="label8a"></div>
+                    @if (Model.SeatData != null)
+                    {
+                        @for (int idx = 1; idx <= Model.SeatData.Rows.Count; idx++)
+                        {
+                            bool isInPanel1 = (idx >= 1 && idx <= 28 && idx != 26) || (idx >= 66 && idx <= 71);
+                            if (!isInPanel1) { continue; }
+                            var row = Model.SeatData.Rows[idx - 1];
+                            var isOccupied = row["SEAT_STATUS"].ToString().ToUpper() == "Y";
+                            if (isOccupied)
+                            {
+                                <input type="button" id="label@(idx)" class="label@(idx)" value="@row["SEAT_OWNER"].ToString()" />
+                            }
+                            else
+                            {
+                                <input type="button" id="label@(idx)" class="label@(idx)" value="" disabled style="display:none;" />
+                            }
+                        }
+                    }
+                </div>
+                <img id="Image1" src="/Acc/leftPrai.png" usemap="#simple" class="map" />
+                <map  id="tabs" class="tabs" name="simple">
+                    <!--left center-->
+                    <!--new left center-->
+                    <area alt="" title="" shape="rect" id="map5" coords="66,403,147,443" />
+                    <area alt="" title="" shape="rect" id="map7" coords="153,403,241,441" />
+                    <area alt="" title="" shape="rect" id="map8" coords="246,403,329,442" />
+                    <area alt="" title="" shape="rect" id="map15" coords="87,448,168,487" />
+                    <area alt="" title="" shape="rect" id="map9" coords="174,448,266,487" />
+                    <area alt="" title="" shape="rect" id="map17" coords="271,448,350,487" />
+
+                    <!--new left bottom-->
+                    <area alt="" title="" shape="rect" id="map66" coords="19,668,95,706" />
+                    <area alt="" title="" shape="rect" id="map14" coords="99,668,182,706" />
+                    <area alt="" title="" shape="rect" id="map19" coords="187,668,267,707" />
+                    <area alt="" title="" shape="rect" id="map70" coords="271,668,349,707" />
+                    <area alt="" title="" shape="rect" id="map71" coords="353,668,426,707" />
+                    <area alt="" title="" shape="rect" id="map67" coords="31,713,107,752" />
+                    <area alt="" title="" shape="rect" id="map16" coords="111,713,187,753" />
+                    <area alt="" title="" shape="rect" id="map68" coords="191,713,269,753" />
+                    <area alt="" title="" shape="rect" id="map18" coords="273,713,352,753" />
+                    <area alt="" title="" shape="rect" id="map69" coords="356,713,436,753" />
+
+                    <!--right -->
+                    <area alt="" title=""  shape="poly" id="map24"  coords="595,130,651,130,651,180,649,183,647,200,649,220,651,225,651,265,593,265,589,255,583,220,583,180,590,140"  />
+                    <area alt="" title=""  shape="poly" id="map23"  coords="583,275,625,275,625,385,583,385,583,275"  />
+                    <area alt="" title=""  shape="poly" id="map25"  coords="595,475,650,475,650,520,643,535,643,550,647,560,651,570,651,612,595,612,590,595,583,550,585,520"  />
+                    <area alt="" title=""  shape="poly" id="map27"  coords="595,670,652,670,652,710,642,735,643,743,646,755,651,765,652,804,595,804,584,755,586,710,593,670"  />
+                    <area alt="" title=""  shape="poly" id="map28"  coords="595,806,650,806,650,847,645,860,643,875,645,885,646,890,649,897,652,900,650,940,593,940,583,890,585,850,593,806"  />
+
+                </map>
+                <div class="desc"><a href="#"></a></div>
+            </div>
+            <!--east wing-->
+            <div id="dropdowncontent2" class="dropdown-content2 dc">
+                <div id="pnlhd2" class="pnlhd pnlhd2"><div class="label41a">Help Desk</div>
+                    @if (Model.SeatData != null)
+                    {
+                        @for (int idx = 1; idx <= Model.SeatData.Rows.Count; idx++)
+                        {
+                            bool isInPanel2 = (idx == 26) || (idx >= 29 && idx <= 41) || (idx >= 62 && idx <= 65) || (idx >= 72);
+                            if (!isInPanel2) { continue; }
+                            var row = Model.SeatData.Rows[idx - 1];
+                            var isOccupied = row["SEAT_STATUS"].ToString().ToUpper() == "Y";
+                            if (isOccupied)
+                            {
+                                <input type="button" id="label@(idx)" class="label@(idx)" value="@row["SEAT_OWNER"].ToString()" />
+                            }
+                            else
+                            {
+                                <input type="button" id="label@(idx)" class="label@(idx)" value="" disabled style="display:none;" />
+                            }
+                        }
+                    }
+                </div>
+                <img id="Image2" src="/Acc/rightPrai.png" usemap="#Image2" class="map" />
+                <map  id="tabs2" class="tabs" name="Image2">
+
+                    <!--new east wing (left)-->
+                    <area alt="" title="" shape="rect" id="map29" coords="195,91,261,217" />
+                    <area alt="" title="" shape="rect" id="map30" coords="129,66,191,176" />
+                    <area alt="" title="" shape="rect" id="map31" coords="196,220,258,312" />
+                    <area alt="" title="" shape="rect" id="map32" coords="129,183,189,289" />
+                    <area alt="" title="" shape="rect" id="map33" coords="196,319,257,410" />
+                    <area alt="" title="" shape="rect" id="map34" coords="129,297,191,385" />
+                    <area alt="" title="" shape="rect" id="map35" coords="195,415,258,523" />
+                    <area alt="" title="" shape="rect" id="map37" coords="127,505,191,615" />
+                    <area alt="" title="" shape="rect" id="map62" coords="196,529,258,639" />
+                    <area alt="" title="" shape="rect" id="map63" coords="130,392,190,500" />
+                    <area alt="" title="" shape="rect" id="map64" coords="195,646,258,749" />
+                    <area alt="" title="" shape="rect" id="map65" coords="127,620,189,725" />
+                    <area alt="" title="" shape="rect" id="map38" coords="198,755,258,860" />
+                    <area alt="" title="" shape="rect" id="map40" coords="127,730,191,831" />
+                    <area alt="" title="" shape="rect" id="map72" coords="127,834,191,952" />
+                    <area alt="" title="" shape="rect" id="map73" coords="195,865,258,975" />
+                    <area alt="" title="" shape="rect" id="map74" coords="458,816,575,857" />
+                    <!--  New desks-->
+                    <area alt="" title="" shape="rect" id="map75" coords="577,649,459,605" />
+                    <area alt="" title="" shape="rect" id="map77" coords="658,510,595,402" />
+                    <area alt="" title="" shape="rect" id="map76" coords="592,510,528,402" />
+
+                    <area alt="" title=""  shape="poly" id="map36" coords="459,653,605,653,605,700,459,700,459,653" />
+                    <area alt="" title=""  shape="poly" id="map39" coords="580,604,718,604,718,651,580,651,580,604" />
+                    <area alt="" title=""  shape="poly" id="map41" coords="580,813,718,813,718,861,580,861,580,813" />
+                    <area alt="" title=""  shape="poly" id="map26" coords="459,863,605,863,605,911,459,911,459,863" />
+                </map>
+                <div class="desc"><a href="#"></a></div>
+            </div>
+          
+            <div id="dropdowncontent3" class="dropdown-content3 dc">
+                <div id="pnlhd3" class="pnlhd pnlhd3">
+                    @if (Model.SeatData != null)
+                    {
+                        @for (int idx = 42; idx <= 61 && idx <= Model.SeatData.Rows.Count; idx++)
+                        {
+                            <input type="button" id="label@(idx)" class="label@(idx)" value="" disabled style="display:none;" />
+                        }
+                    }
+                </div>
+                <img id="Image3" src="/Acc/lastPrai.png" usemap="#Image3" class="map" />
+                <map  id="tabs3" class="tabs" name="Image3">
+
+                    <!-- left -->
+                     
+                    <area alt="" title="" shape="poly" id="map46" coords="109,213,131,206,148,198,164,184,175,167,183,147,238,160,214,239,111,267" />
+                    <area alt="" title="" shape="poly" id="map47" coords="246,162,308,172,304,193,304,217,314,240,327,257,344,272,297,318,220,244" />
+                    <area alt="" title="" shape="poly" id="map48" coords="460,363,441,296,420,305,398,305,371,295,356,286,344,275,298,322,378,391" />
+                    <area alt="" title="" shape="poly" id="map49" coords="476,423,456,431,442,443,427,466,415,501,363,493,384,398,460,370" />
+                    <area alt="" title="" shape="poly" id="map50" coords="414,504,414,528,422,559,436,582,454,596,426,644,358,598,363,495" />
+                    <area alt="" title="" shape="poly" id="map51" coords="389,706,365,695,341,692,319,698,290,712,258,657,350,605,424,653" />
+                    <area alt="" title="" shape="poly" id="map52" coords="286,713,266,726,244,751,233,774,230,800,169,798,163,714,255,657" />
+                    <area alt="" title="" shape="poly" id="map53" coords="103,794,102,776,95,758,88,744,69,726,47,714,66,667,154,714,162,796" />
+
+                    <area alt="" title="" shape="poly" id="map42" coords="99,591,125,603,147,607,176,605,194,598,215,585,252,649,163,703,72,655" />
+                    <area alt="" title="" shape="poly" id="map43" coords="218,584,247,568,262,553,274,531,283,490,351,497,345,597,254,648" />
+                    <area alt="" title="" shape="poly" id="map44" coords="284,488,288,451,282,426,272,407,246,381,244,379,292,325,369,397,352,495" />
+                    <area alt="" title="" shape="poly" id="map45" coords="130,347,164,338,195,343,220,359,242,378,290,325,215,253,118,277" />
+                </map>
+                <div class="desc"><a href="#"></a></div>
+            </div>
+          
+            <div id="dropdowncontent4" class="dropdown-content4 dc" >
+                <div style="" >
+                    <iframe src="/Acc/PopUp/List2" class="map1" id="frame1"></iframe>
+                    <div class="desc"><a href="#"></a></div>
+                </div>
+            </div>
+   
+            <div id="dropdowncontent5" class="dropdown-content5 dc" >
+                <div style="" >
+                    <iframe src="/Acc/PopUp/List3Prai" class="map1" id="Iframe2"></iframe>
+                    <div class="desc"><a href="#"></a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+</div>

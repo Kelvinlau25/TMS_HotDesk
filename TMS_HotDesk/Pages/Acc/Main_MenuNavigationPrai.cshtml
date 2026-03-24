@@ -1,0 +1,36 @@
+@page
+@model TMS_HotDesk.Pages.Acc.Main_MenuNavigationPraiModel
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "TMS PRAI Hot Desking Home Page";
+}
+
+@section Head {
+<style>
+.footer {
+    width: 100%;
+    height: 24px;
+    color: White;
+    font-weight: bold;
+    background: #2969b0;
+    background: -webkit-linear-gradient(#2969b0, rgb(15, 78, 90));
+    background: -o-linear-gradient( #2969b0, rgb(15, 78, 90));
+    background: -moz-linear-gradient( #2969b0, rgb(15, 78, 90));
+    background: linear-gradient( #2969b0, rgb(15, 78, 90));
+}
+.footer MARQUEE
+{
+	padding-top:0px;
+	font-size:16px;
+    font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+    text-shadow: 2px 2px 12px #000;
+    color: White;
+    font-weight:lighter;
+}
+</style>
+}
+
+<iframe src="/Acc/MenuNavigationPrai" id="ifrm" height="1150px" width="100%" scrolling="no"></iframe>
+<div class="footer">
+    <marquee width="100%">Welcome To TMS</marquee>
+</div>
