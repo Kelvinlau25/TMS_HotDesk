@@ -43,20 +43,7 @@
     <None Remove="Library\**" />
   </ItemGroup>
 
-  <!-- Treat aspx/ascx/master files as content (not compiled) - legacy files -->
-  <ItemGroup>
-    <Content Include="**\*.aspx" />
-    <Content Include="**\*.ascx" />
-    <Content Include="**\*.master" />
-  </ItemGroup>
+  <!-- Legacy WebForms files have been removed; aspx/ascx/master content includes are no longer needed -->
 
-  <!-- Exclude old aspx code-behind and designer files from compilation -->
-  <ItemGroup>
-    <Compile Remove="**\*.aspx.cs" />
-    <Compile Remove="**\*.aspx.designer.cs" />
-    <Compile Remove="**\*.ascx.cs" />
-    <Compile Remove="**\*.ascx.designer.cs" />
-    <Compile Remove="**\*.master.cs" />
-  </ItemGroup>
 
 </Project>
