@@ -1,6 +1,4 @@
 using System.Collections.Generic;
-using System.Net;
-using System.Web.Script.Serialization;
 
 public class WeatherInfo
 {
