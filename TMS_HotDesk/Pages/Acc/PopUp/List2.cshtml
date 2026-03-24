@@ -1,0 +1,41 @@
+@page
+@model TMS_HotDesk.Pages.Acc.PopUp.List2Model
+@using System.Data
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="/css_new/TMSAccess.css" rel="stylesheet" type="text/css" />
+</head>
+<body class="framebody">
+    <br /><br />
+    @if (Model.Data.Rows.Count == 0)
+    {
+        <div style="text-align:center; font-weight:bold; color:white;">Record Not Found</div>
+    }
+    else
+    {
+        <table width="100%">
+            <tr class="OutTable">
+                <th style="text-align:center; vertical-align:middle;">STAFF ID</th>
+                <th style="text-align:center; vertical-align:middle;">STAFF NAME</th>
+                <th style="text-align:center; vertical-align:middle;">LAST SCAN</th>
+                <th style="text-align:center; vertical-align:middle;">DOOR</th>
+                <th style="text-align:center; vertical-align:middle;">SEAT STATUS</th>
+            </tr>
+            @{ int rowIndex = 0; }
+            @foreach (DataRow row in Model.Data.Rows)
+            {
+                <tr class="@(rowIndex % 2 == 0 ? "OutTable" : "OutTable1")">
+                    <td style="text-align:left; vertical-align:middle;">@row["STAFF_ID"]</td>
+                    <td style="text-align:left; vertical-align:middle;">@row["STAFF_NAME"]</td>
+                    <td style="text-align:left; vertical-align:middle;">@row["TRANSTIME"]</td>
+                    <td style="text-align:left; vertical-align:middle;">@row["DOOR"]</td>
+                    <td style="text-align:left; vertical-align:middle;">@row["SEAT"]</td>
+                </tr>
+                rowIndex++;
+            }
+        </table>
+    }
+</body>
+</html>

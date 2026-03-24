@@ -1,0 +1,74 @@
+@page
+@model TMS_HotDesk.Pages.Acc.PopUp.ListPraiModel
+@using System.Data
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Check In List";
+}
+
+@section Head {
+    <link href="/css_new/TMSAccessList2.css" rel="stylesheet" type="text/css" />
+    <link href="/css_new/TMSAccess.css" rel="stylesheet" type="text/css" />
+
+    <script>
+        document.title = 'Desk Check In Page';
+
+        function closeWin() {
+            window.close();
+        }
+    </script>
+
+    <script type="text/javascript">
+        function popupwindow(ID, Name) {
+            var w = 800;
+            var h = 600;
+            var left = (screen.width / 2) - (w / 2);
+            var top = (screen.height / 2) - (h / 2);
+            window.open('/Acc/PopUp/List?itm1=' + ID + '&itm2=' + Name, 'PopUp', 'directories=no,titlebar=no,toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=no,width=800,height=600,top=' + top + ', left=' + left + '');
+        }
+    </script>
+
+    <script type="text/javascript">
+        function passvalue(staffID, staffName) {
+            window.opener.$('.@Model.StaffID').val(staffID);
+            window.opener.$('.@Model.StaffName').val(staffName);
+            window.close();
+        }
+    </script>
+}
+
+<table width="100%">
+    <tr>
+        <td>
+            @if (Model.Data == null || Model.Data.Rows.Count == 0)
+            {
+                <div style="text-align:center; font-weight:bold; color:red;">Record Not Found</div>
+            }
+            else
+            {
+                <table width="100%">
+                    <tr>
+                        <th class="OutTableHeader" style="text-align:center; vertical-align:middle;">STAFF ID</th>
+                        <th class="OutTableHeader" style="text-align:center; vertical-align:middle;">STAFF NAME</th>
+                        <th class="OutTableHeader" style="text-align:center; vertical-align:middle;">ACTION</th>
+                    </tr>
+                    @{ int rowIndex = 0; }
+                    @foreach (DataRow row in Model.Data.Rows)
+                    {
+                        <tr class="@(rowIndex % 2 == 0 ? "OutTable" : "OutTable1")">
+                            <td style="text-align:left; vertical-align:middle;">@row["STAFF_ID"]</td>
+                            <td style="text-align:left; vertical-align:middle;">@row["STAFF_NAME"]</td>
+                            <td style="text-align:center; vertical-align:middle;">
+                                <button class="dropbtn1" type="button" onclick="javascript:passvalue('@row["STAFF_ID"]','@row["STAFF_NAME"]');">Check In</button>
+                            </td>
+                        </tr>
+                        rowIndex++;
+                    }
+                </table>
+            }
+        </td>
+    </tr>
+</table>
+<br />
+&nbsp;
+<button onclick="closeWin()" class="dropbtn1 dropbtn2">Back</button>
